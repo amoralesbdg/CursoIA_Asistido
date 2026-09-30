@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* ───────── A.1 Primitivos ───────── */
+:root {
+  --gray-0: #ffffff; --gray-50: #f9fafb; --gray-100: #f2f3f5; --gray-200: #e5e7eb;
+  --gray-300: #d1d5db; --gray-400: #9ca3af; --gray-500: #6b7280; --gray-600: #4b5563;
+  --gray-700: #374151; --gray-800: #1f2328; --gray-900: #101214;
+  --blue-500: #0a84ff; --blue-600: #0066cc;
+  --green-500: #34c759; --amber-500: #ff9f0a; --red-500: #ff3b30; --yellow-500: #ffd60a;
+
+  /* ───────── A.3 – A.6 ───────── */
+  --font-family-base: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+  --font-family-mono: "SF Mono", "JetBrains Mono", monospace;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-full: 999px;
+  --duration-fast: 120ms; --duration-base: 200ms; --duration-slow: 320ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --easing-decelerate: cubic-bezier(0, 0, 0, 1);
+  --priority-high: var(--red-500); --priority-medium: var(--yellow-500); --priority-low: #30b0c7;
+  --status-todo: var(--gray-400); --status-in-progress: var(--blue-500);
+  --status-review: var(--amber-500); --status-done: var(--green-500);
+}
+
+/* ───────── A.2 Semánticos — light (por defecto) ───────── */
+:root {
+  --color-bg-canvas: var(--gray-50);
+  --color-bg-surface: var(--gray-0);
+  --color-bg-surface-raised: var(--gray-0);
+  --color-border-subtle: var(--gray-200);
+  --color-border-strong: var(--gray-300);
+  --color-text-primary: var(--gray-900);
+  --color-text-secondary: var(--gray-500);
+  --color-text-disabled: var(--gray-300);
+  --color-accent: var(--blue-500);
+  --color-accent-contrast: var(--gray-0);
+  --color-success: var(--green-500);
+  --color-warning: var(--amber-500);
+  --color-danger: var(--red-500);
+  --color-shadow: rgba(16, 18, 20, 0.08);
+  /* Derivados para cumplir WCAG (ver PLAN.md §Desviaciones) */
+  --color-accent-action: var(--blue-600);   /* fondo de botón y texto de link: 5.6:1 con blanco */
+  --color-accent-action-hover: #0058b3;
+  --color-link: var(--blue-600);
+  --color-danger-text: #c4001a;             /* texto de error ≥ 4.5:1 sobre surface */
+  --color-border-input: var(--gray-500);    /* borde de input ≥ 3:1 (1.4.11) */
+  --shadow-1: 0 1px 2px var(--color-shadow);
+  --shadow-2: 0 2px 8px var(--color-shadow);
+  --shadow-3: 0 8px 24px var(--color-shadow);
+  --shadow-4: 0 16px 48px var(--color-shadow);
+}
+
+/* ───────── A.2 Semánticos — dark ───────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-bg-canvas: var(--gray-900);
+    --color-bg-surface: #17191c;
+    --color-bg-surface-raised: #1f2226;
+    --color-border-subtle: #2a2d31;
+    --color-border-strong: #3a3d42;
+    --color-text-primary: var(--gray-50);
+    --color-text-secondary: var(--gray-400);
+    --color-text-disabled: var(--gray-600);
+    --color-shadow: rgba(0, 0, 0, 0.45);
+    --color-link: var(--blue-500);
+    --color-danger-text: #ff6961;
+    --color-border-input: #7b8088;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg-canvas: var(--gray-900);
+  --color-bg-surface: #17191c;
+  --color-bg-surface-raised: #1f2226;
+  --color-border-subtle: #2a2d31;
+  --color-border-strong: #3a3d42;
+  --color-text-primary: var(--gray-50);
+  --color-text-secondary: var(--gray-400);
+  --color-text-disabled: var(--gray-600);
+  --color-shadow: rgba(0, 0, 0, 0.45);
+  --color-link: var(--blue-500);
+  --color-danger-text: #ff6961;
+  --color-border-input: #7b8088;
+}
+
+/* ───────── Mapeo a Tailwind ───────── */
+@theme inline {
+  --font-sans: var(--font-family-base);
+  --font-mono: var(--font-family-mono);
+  --color-canvas: var(--color-bg-canvas);
+  --color-surface: var(--color-bg-surface);
+  --color-raised: var(--color-bg-surface-raised);
+  --color-subtle: var(--color-border-subtle);
+  --color-strong: var(--color-border-strong);
+  --color-input: var(--color-border-input);
+  --color-fg: var(--color-text-primary);
+  --color-fg-2: var(--color-text-secondary);
+  --color-fg-off: var(--color-text-disabled);
+  --color-brand: var(--color-accent);
+  --color-action: var(--color-accent-action);
+  --color-action-hover: var(--color-accent-action-hover);
+  --color-on-accent: var(--color-accent-contrast);
+  --color-anchor: var(--color-link);
+  --color-critical: var(--color-danger);
+  --color-critical-fg: var(--color-danger-text);
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+  --text-caption: 12px; --text-caption--line-height: 16px;
+  --text-body-sm: 13px; --text-body-sm--line-height: 18px;
+  --text-body: 15px; --text-body--line-height: 22px;
+  --text-title-sm: 17px; --text-title-sm--line-height: 22px;
+  --text-title: 20px; --text-title--line-height: 26px;
+  --text-headline: 28px; --text-headline--line-height: 34px;
+  --breakpoint-sm: 480px; --breakpoint-md: 768px; --breakpoint-lg: 1024px; --breakpoint-xl: 1440px;
+}
+
+html { font-family: var(--font-family-base); } /* rem base = 16px: las escalas de Tailwind coinciden con los px del spec */
+body {
+  font-size: 15px;
+  line-height: 22px;
+  background: var(--color-bg-canvas);
+  color: var(--color-text-primary);
+  margin: 0;
+  transition: background-color var(--duration-slow) var(--easing-standard),
+    color var(--duration-slow) var(--easing-standard);
+}
+
+/* B.2 — foco visible global */
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+/* B.7 — reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+  }
+}
+
+/* Panel lateral de ticket (C.4): entra desde la derecha; reduced-motion fuerza 0ms. */
+@keyframes panel-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+dialog[data-panel][open] { animation: panel-in var(--duration-base) var(--easing-decelerate); }
