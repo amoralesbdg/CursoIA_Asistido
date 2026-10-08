@@ -1,0 +1,1376 @@
+openapi: 3.1.0
+info:
+  title: Mini Jira API
+  version: 0.1.0
+  description: "Endpoints P0, P1 y P2 del MVP de Mini Jira (contrato completo).
+    Fase sin autenticación/autorización: todo endpoint se ejecuta de forma
+    anónima. Los campos actorId/creatorId/authorId son temporales: reemplazan al
+    JWT mientras no se valida Authorization, y se declaran explícitamente en el
+    request. Ver docs/api-contract.md para el contrato completo."
+components:
+  schemas:
+    Role:
+      type: string
+      enum:
+        - admin
+        - user
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          $ref: "#/components/schemas/Role"
+      required:
+        - id
+        - name
+        - username
+        - email
+        - role
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type:
+            - string
+            - "null"
+        creatorId:
+          type: string
+          format: uuid
+        memberIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        ticketCount:
+          type: integer
+          minimum: 0
+      required:
+        - id
+        - name
+        - description
+        - creatorId
+        - memberIds
+        - ticketCount
+    Status:
+      type: string
+      enum:
+        - todo
+        - in-progress
+        - review
+        - done
+    Priority:
+      type: string
+      enum:
+        - high
+        - medium
+        - low
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        key:
+          type: string
+        projectId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type:
+            - string
+            - "null"
+        status:
+          $ref: "#/components/schemas/Status"
+        priority:
+          $ref: "#/components/schemas/Priority"
+        assigneeIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        creatorId:
+          type: string
+          format: uuid
+        tags:
+          type: array
+          items:
+            type: string
+        dueDate:
+          type:
+            - string
+            - "null"
+        archived:
+          type: boolean
+      required:
+        - id
+        - key
+        - projectId
+        - title
+        - description
+        - status
+        - priority
+        - assigneeIds
+        - creatorId
+        - tags
+        - dueDate
+        - archived
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ticketId:
+          type: string
+          format: uuid
+        authorId:
+          type: string
+          format: uuid
+        body:
+          type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - ticketId
+        - authorId
+        - body
+        - createdAt
+    AuditAction:
+      type: string
+      enum:
+        - created
+        - updated
+        - archived
+        - status_changed
+    AuditEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ticketId:
+          type: string
+          format: uuid
+        actorId:
+          type: string
+          format: uuid
+        action:
+          $ref: "#/components/schemas/AuditAction"
+        changes:
+          type:
+            - object
+            - "null"
+          additionalProperties: {}
+        createdAt:
+          type: string
+      required:
+        - id
+        - ticketId
+        - actorId
+        - action
+        - changes
+        - createdAt
+    Lock:
+      type: object
+      properties:
+        ticketId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+      required:
+        - ticketId
+        - userId
+        - createdAt
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+      required:
+        - type
+        - title
+        - status
+        - detail
+        - instance
+  parameters: {}
+paths:
+  /api/auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Registrar un nuevo usuario (RF-01, H1)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  minLength: 1
+                  example: jdoe
+                password:
+                  type: string
+                  minLength: 8
+                  example: S3curePass!
+                email:
+                  type: string
+                  format: email
+                  example: jdoe@example.com
+              required:
+                - username
+                - password
+                - email
+      responses:
+        "201":
+          description: Usuario creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        $ref: "#/components/schemas/User"
+                      token:
+                        type: string
+                    required:
+                      - user
+                      - token
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Datos de registro inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "409":
+          description: Username o email ya existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Iniciar sesión (RF-01, H1)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  minLength: 1
+                  example: jdoe
+                password:
+                  type: string
+                  minLength: 1
+                  example: S3curePass!
+              required:
+                - username
+                - password
+      responses:
+        "200":
+          description: Login exitoso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        $ref: "#/components/schemas/User"
+                      token:
+                        type: string
+                    required:
+                      - user
+                      - token
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Datos de login inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "401":
+          description: Credenciales incorrectas
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/projects:
+    get:
+      tags:
+        - Projects
+      summary: Listar proyectos (RF-08, RF-09)
+      description: "Fase sin autenticación: se listan todos los proyectos (equivalente
+        a la vista de Admin). El filtrado por creatorId/memberIds del usuario
+        normal requiere el token de /auth, fuera de alcance de P0."
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            default: 1
+            example: 1
+          required: false
+          name: page
+          in: query
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+            example: 20
+          required: false
+          name: pageSize
+          in: query
+      responses:
+        "200":
+          description: Listado paginado de proyectos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Project"
+                      page:
+                        type: integer
+                      pageSize:
+                        type: integer
+                      total:
+                        type: integer
+                      totalPages:
+                        type: integer
+                    required:
+                      - items
+                      - page
+                      - pageSize
+                      - total
+                      - totalPages
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Parámetros de paginación inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    post:
+      tags:
+        - Projects
+      summary: Crear un proyecto (RF-08, H5)
+      description: creatorId actúa como owner (H5). Cualquier usuario existente puede
+        crear proyectos.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  example: Portal de clientes
+                description:
+                  type: string
+                creatorId:
+                  type: string
+                  format: uuid
+                  description: "Id del usuario creador, actúa como owner (H5). Campo temporal
+                    mientras no hay JWT: en esta fase ningún endpoint valida
+                    Authorization."
+                  example: 11111111-1111-1111-1111-111111111111
+              required:
+                - name
+                - creatorId
+      responses:
+        "201":
+          description: Proyecto creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Project"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Datos de proyecto inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: creatorId no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/projects/{id}:
+    get:
+      tags:
+        - Projects
+      summary: Obtener un proyecto por id (RF-08)
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 11111111-1111-1111-1111-111111111111
+          required: true
+          name: id
+          in: path
+      responses:
+        "200":
+          description: Proyecto encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Project"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "404":
+          description: Proyecto no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/projects/{id}/tickets:
+    get:
+      tags:
+        - Tickets
+      summary: Listar tickets de un proyecto, agrupados por estado (RF-07, RF-12, RF-13)
+      description: Excluye tickets archivados por defecto. Si se pasa `status`,
+        devuelve un arreglo plano filtrado por ese estado; si se omite, agrupa
+        por las 4 columnas del Kanban.
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          required: true
+          name: id
+          in: path
+        - schema:
+            $ref: "#/components/schemas/Status"
+          required: false
+          name: status
+          in: query
+      responses:
+        "200":
+          description: Tickets del proyecto
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    anyOf:
+                      - type: object
+                        properties:
+                          todo:
+                            type: array
+                            items:
+                              $ref: "#/components/schemas/Ticket"
+                          in-progress:
+                            type: array
+                            items:
+                              $ref: "#/components/schemas/Ticket"
+                          review:
+                            type: array
+                            items:
+                              $ref: "#/components/schemas/Ticket"
+                          done:
+                            type: array
+                            items:
+                              $ref: "#/components/schemas/Ticket"
+                        required:
+                          - todo
+                          - in-progress
+                          - review
+                          - done
+                      - type: array
+                        items:
+                          $ref: "#/components/schemas/Ticket"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "404":
+          description: Proyecto no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/projects/{id}/members:
+    post:
+      tags:
+        - Projects
+      summary: Agregar un miembro a un proyecto (RF-09, RF-09-bis, H5)
+      description: Permitido si actor.id=project.creatorId o actor.role=admin (H5); si
+        no, 403 (H5 edge case).
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 11111111-1111-1111-1111-111111111111
+          required: true
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+                  example: 33333333-3333-3333-3333-333333333333
+                actorId:
+                  type: string
+                  format: uuid
+                  description: Id del usuario que realiza la acción (debe ser el creador del
+                    proyecto o un admin — H5). Campo temporal mientras no hay
+                    JWT.
+                  example: 11111111-1111-1111-1111-111111111111
+              required:
+                - userId
+                - actorId
+      responses:
+        "200":
+          description: Proyecto actualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Project"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Datos inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "403":
+          description: No autorizado
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Proyecto o usuario no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/tickets:
+    get:
+      tags:
+        - Tickets
+      summary: Listar tickets con filtros combinados (RF-12, H8)
+      description: Combina todos los filtros presentes con AND. Excluye archivados por
+        defecto.
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          required: false
+          name: projectId
+          in: query
+        - schema:
+            $ref: "#/components/schemas/Priority"
+          required: false
+          name: priority
+          in: query
+        - schema:
+            type: string
+            format: uuid
+          required: false
+          name: assigneeId
+          in: query
+        - schema:
+            type: string
+            minLength: 1
+          required: false
+          name: tag
+          in: query
+        - schema:
+            type: string
+            example: 2026-01-01
+          required: false
+          name: dueDateFrom
+          in: query
+        - schema:
+            type: string
+            example: 2026-12-31
+          required: false
+          name: dueDateTo
+          in: query
+        - schema:
+            type: integer
+            minimum: 1
+            default: 1
+            example: 1
+          required: false
+          name: page
+          in: query
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+            example: 20
+          required: false
+          name: pageSize
+          in: query
+      responses:
+        "200":
+          description: Listado paginado de tickets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Ticket"
+                      page:
+                        type: integer
+                      pageSize:
+                        type: integer
+                      total:
+                        type: integer
+                      totalPages:
+                        type: integer
+                    required:
+                      - items
+                      - page
+                      - pageSize
+                      - total
+                      - totalPages
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Parámetros de filtro inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    post:
+      tags:
+        - Tickets
+      summary: Crear un ticket (RF-07, RF-11, H6)
+      description: projectId obligatorio (400 si falta — H5 edge case); priority debe
+        ser uno de los 3 valores permitidos (400 si no — H6 edge case). Genera
+        `key` server-side con formato PREFIJO-N.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+                  example: Corregir overflow en tabla de facturas
+                description:
+                  type: string
+                projectId:
+                  type: string
+                  format: uuid
+                  example: 11111111-1111-1111-1111-111111111111
+                priority:
+                  $ref: "#/components/schemas/Priority"
+                assigneeIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                tags:
+                  type: array
+                  items:
+                    type: string
+                dueDate:
+                  type: string
+                  example: 2026-11-01
+                creatorId:
+                  type: string
+                  format: uuid
+                  description: "Id del usuario que realiza la acción. Campo temporal mientras no
+                    hay JWT: en esta fase ningún endpoint valida Authorization,
+                    así que el actor se declara explícitamente en el request
+                    (ver CLAUDE.md / instrucciones de fase)."
+                  example: 33333333-3333-3333-3333-333333333333
+              required:
+                - title
+                - projectId
+                - priority
+                - creatorId
+      responses:
+        "201":
+          description: Ticket creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Ticket"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Datos inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Proyecto o creatorId no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/tickets/{id}:
+    patch:
+      tags:
+        - Tickets
+      summary: Editar un ticket (RF-07, RF-11, H2, H3)
+      description: Permitido si actor.role=admin, o actor.id=ticket.creatorId, o
+        actor.id está en ticket.assigneeIds (H2, H3); si no, 403.
+        Last-write-wins, sin detección de conflicto (H10). actorId va en el body
+        mientras no hay JWT.
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 22222222-2222-2222-2222-222222222222
+          required: true
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                actorId:
+                  type: string
+                  format: uuid
+                  description: "Id del usuario que realiza la acción (para la regla de ownership:
+                    admin, creador o asignado). Campo temporal mientras no hay
+                    JWT: en esta fase ningún endpoint valida Authorization."
+                  example: 33333333-3333-3333-3333-333333333333
+                title:
+                  type: string
+                  minLength: 1
+                description:
+                  type: string
+                priority:
+                  $ref: "#/components/schemas/Priority"
+                assigneeIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                tags:
+                  type: array
+                  items:
+                    type: string
+                dueDate:
+                  type: string
+                  example: 2026-11-01
+              required:
+                - actorId
+      responses:
+        "200":
+          description: Ticket actualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Ticket"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Datos inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "403":
+          description: No autorizado
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Ticket no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    delete:
+      tags:
+        - Tickets
+      summary: Archivar un ticket (soft-delete) (RF-06, H4)
+      description: "Mismo chequeo de ownership que PATCH (admin, creador o asignado —
+        H4, H4 edge case). No borra físicamente: marca archived_at. actorId va
+        por query param mientras no hay JWT."
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 22222222-2222-2222-2222-222222222222
+          required: true
+          name: id
+          in: path
+        - schema:
+            type: string
+            format: uuid
+            description: "Id del usuario que realiza la acción (para la regla de ownership:
+              admin, creador o asignado). Campo temporal mientras no hay JWT: en
+              esta fase ningún endpoint valida Authorization."
+            example: 33333333-3333-3333-3333-333333333333
+          required: true
+          name: actorId
+          in: query
+      responses:
+        "200":
+          description: Ticket archivado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Ticket"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: actorId inválido
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "403":
+          description: No autorizado
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Ticket no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/tickets/{id}/status:
+    patch:
+      tags:
+        - Tickets
+      summary: Avanzar el estado de un ticket (RF-13, H9)
+      description: Transición secuencial obligatoria todo→in-progress→review→done, un
+        paso a la vez, sin saltos ni retrocesos.
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 22222222-2222-2222-2222-222222222222
+          required: true
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  $ref: "#/components/schemas/Status"
+              required:
+                - status
+      responses:
+        "200":
+          description: Ticket actualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Ticket"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Status inválido
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Ticket no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "409":
+          description: Transición de estado no permitida
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/tickets/{id}/assignees:
+    post:
+      tags:
+        - Tickets
+      summary: Asignar un usuario a un ticket (RF-10, H7)
+      description: Agrega userId a assigneeIds si no está ya presente (idempotente).
+        Permite autoasignación y asignación múltiple (repitiendo la llamada con
+        otro userId).
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 22222222-2222-2222-2222-222222222222
+          required: true
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+                  example: 33333333-3333-3333-3333-333333333333
+              required:
+                - userId
+      responses:
+        "200":
+          description: Ticket actualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Ticket"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: userId inválido
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Ticket o usuario no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/tickets/{id}/lock:
+    post:
+      tags:
+        - Tickets
+      summary: Tomar el soft lock informativo de un ticket (H10)
+      description: "Puramente informativo/presencia: no bloquea PATCH /tickets/:id
+        (last-write-wins, sin conflicto). Reemplaza cualquier lock previo del
+        ticket (relación 1:1)."
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 22222222-2222-2222-2222-222222222222
+          required: true
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+                  example: 33333333-3333-3333-3333-333333333333
+              required:
+                - userId
+      responses:
+        "200":
+          description: Lock tomado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Lock"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: userId inválido
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Ticket o usuario no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    delete:
+      tags:
+        - Tickets
+      summary: Liberar el lock propio de un ticket (H10)
+      description: Libera el lock solo si pertenece a userId. No falla si no existe lock.
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 22222222-2222-2222-2222-222222222222
+          required: true
+          name: id
+          in: path
+        - schema:
+            type: string
+            format: uuid
+            example: 33333333-3333-3333-3333-333333333333
+          required: true
+          name: userId
+          in: query
+      responses:
+        "200":
+          description: Lock liberado (o no existía)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: "null"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: userId inválido
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/tickets/{id}/comments:
+    get:
+      tags:
+        - Comments
+      summary: Listar comentarios de un ticket en orden cronológico (RF-15, H11)
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 22222222-2222-2222-2222-222222222222
+          required: true
+          name: id
+          in: path
+        - schema:
+            type: integer
+            minimum: 1
+            default: 1
+            example: 1
+          required: false
+          name: page
+          in: query
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+            example: 20
+          required: false
+          name: pageSize
+          in: query
+      responses:
+        "200":
+          description: Comentarios paginados, orden ascendente por createdAt
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Comment"
+                      page:
+                        type: integer
+                      pageSize:
+                        type: integer
+                      total:
+                        type: integer
+                      totalPages:
+                        type: integer
+                    required:
+                      - items
+                      - page
+                      - pageSize
+                      - total
+                      - totalPages
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Parámetros de paginación inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Ticket no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    post:
+      tags:
+        - Comments
+      summary: Añadir un comentario a un ticket (RF-15, H11)
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 22222222-2222-2222-2222-222222222222
+          required: true
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  minLength: 1
+                  example: Quedó pendiente revisar el caso de borde H8.
+                authorId:
+                  type: string
+                  format: uuid
+                  description: Id del autor del comentario. Campo temporal mientras no hay JWT
+                    (ver nota de fase en CLAUDE.md).
+                  example: 33333333-3333-3333-3333-333333333333
+              required:
+                - body
+                - authorId
+      responses:
+        "201":
+          description: Comentario creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Comment"
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Datos de comentario inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Ticket o authorId no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/audit/{ticketId}:
+    get:
+      tags:
+        - Audit
+      summary: Listar historial de auditoría de un ticket (H2, H4)
+      description: Orden cronológico descendente. Registra
+        created/updated/archived/status_changed; permite trazar acciones de
+        Admin sobre tickets ajenos (H2).
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: 22222222-2222-2222-2222-222222222222
+          required: true
+          name: ticketId
+          in: path
+        - schema:
+            type: integer
+            minimum: 1
+            default: 1
+            example: 1
+          required: false
+          name: page
+          in: query
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+            example: 20
+          required: false
+          name: pageSize
+          in: query
+      responses:
+        "200":
+          description: Auditoría paginada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/AuditEntry"
+                      page:
+                        type: integer
+                      pageSize:
+                        type: integer
+                      total:
+                        type: integer
+                      totalPages:
+                        type: integer
+                    required:
+                      - items
+                      - page
+                      - pageSize
+                      - total
+                      - totalPages
+                  error:
+                    type: "null"
+                required:
+                  - data
+                  - error
+        "400":
+          description: Parámetros de paginación inválidos
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Ticket no existe
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+webhooks: {}

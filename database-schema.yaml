@@ -1,0 +1,278 @@
+# Database Schema — Mini Jira (MVP)
+#
+# Fuente: docs/specs.md (RF-01 a RF-19), docs/api-contract.md (entidades y endpoints),
+# apps/web/src/mocks/types.ts (enums del frontend), architecture/er_diagram.md (ER conceptual),
+# docs/adr/001-database-selection.md (motor: Supabase/PostgreSQL).
+#
+# Formato: YAML semántico, no SQL. Enums usan los mismos valores literales que types.ts.
+
+engine: PostgreSQL (Supabase)
+
+enums:
+  role:
+    description: Rol del usuario (RF-02).
+    values: [admin, user]
+    default: user
+
+  status:
+    description: Estado del ticket en el tablero Kanban (RF-13). Transición secuencial obligatoria, sin saltos ni retrocesos (H9).
+    values: [todo, in-progress, review, done]
+    order: [todo, in-progress, review, done]
+
+  priority:
+    description: Prioridad del ticket (RF-11). Único enum permitido (H6 edge case).
+    values: [high, medium, low]
+
+  audit_action:
+    description: Tipo de acción registrada en audit_log.
+    values: [created, updated, archived, status_changed]
+
+tables:
+  users:
+    description: Cuenta de usuario con autenticación propia (RF-01). Tabla propia e independiente, no delega en Supabase Auth.
+    columns:
+      id:
+        type: uuid
+        constraints: [PK, DEFAULT gen_random_uuid()]
+      name:
+        type: text
+        constraints: [NOT NULL]
+      username:
+        type: text
+        constraints: [NOT NULL, UNIQUE]
+        notes: Login propio con usuario/contraseña (RF-01). Username único (H1 edge case).
+      email:
+        type: text
+        constraints: [NOT NULL, UNIQUE]
+        notes: Email obligatorio por cuenta (RF-01), aunque las notificaciones por email queden en fase 2.
+      password_hash:
+        type: text
+        constraints: [NOT NULL]
+        notes: Hash de contraseña (bcrypt/argon2), nunca texto plano.
+      role:
+        type: enum(role)
+        constraints: [NOT NULL, DEFAULT 'user']
+      created_at:
+        type: timestamptz
+        constraints: [NOT NULL, DEFAULT now()]
+    indexes:
+      - columns: [username]
+        unique: true
+      - columns: [email]
+        unique: true
+
+  projects:
+    description: Proyecto que agrupa tickets (RF-08). ticket_count se calcula server-side, no se almacena.
+    columns:
+      id:
+        type: uuid
+        constraints: [PK, DEFAULT gen_random_uuid()]
+      name:
+        type: text
+        constraints: [NOT NULL]
+      description:
+        type: text
+        constraints: []
+      creator_id:
+        type: uuid
+        constraints: ["FK→users.id", NOT NULL]
+        notes: Actúa como owner del proyecto (H5). Define visibilidad para usuarios normales (RF-09).
+      created_at:
+        type: timestamptz
+        constraints: [NOT NULL, DEFAULT now()]
+    notes:
+      - "ticket_count NO es columna: se calcula server-side como COUNT(tickets WHERE project_id=... AND archived_at IS NULL) (ver api-contract.md)."
+      - "No se modela archived_at en projects: specs.md no describe borrado/archivado de proyectos."
+
+  project_members:
+    description: Relación N:M usuario↔proyecto (RF-09, RF-09-bis). Membresía asignada por el creador del proyecto o un Admin.
+    relation: N:M
+    columns:
+      project_id:
+        type: uuid
+        constraints: ["FK→projects.id", NOT NULL]
+      user_id:
+        type: uuid
+        constraints: ["FK→users.id", NOT NULL]
+      added_at:
+        type: timestamptz
+        constraints: [NOT NULL, DEFAULT now()]
+    primary_key: [project_id, user_id]
+    notes:
+      - "El creador del proyecto no se inserta automáticamente aquí: la visibilidad de RF-09 se resuelve con creator_id OR membresía en esta tabla."
+
+  tickets:
+    description: Ticket asociado a exactamente un proyecto (RF-07, relación 1:N proyecto→ticket).
+    columns:
+      id:
+        type: uuid
+        constraints: [PK, DEFAULT gen_random_uuid()]
+      key:
+        type: text
+        constraints: [NOT NULL, UNIQUE]
+        notes: Formato PREFIJO-N, generado server-side (ver api-contract.md).
+      project_id:
+        type: uuid
+        constraints: ["FK→projects.id", NOT NULL]
+        notes: Obligatorio (RF-07, H5 edge case). POST /tickets rechaza si falta.
+      title:
+        type: text
+        constraints: [NOT NULL]
+      description:
+        type: text
+        constraints: []
+      status:
+        type: enum(status)
+        constraints: [NOT NULL, DEFAULT 'todo']
+        notes: Transición secuencial obligatoria todo→in-progress→review→done (RF-13, H9). Se valida en la capa de aplicación, no como CHECK de columna.
+      priority:
+        type: enum(priority)
+        constraints: [NOT NULL]
+      creator_id:
+        type: uuid
+        constraints: ["FK→users.id", NOT NULL]
+      due_date:
+        type: date
+        constraints: []
+        notes: "Campo 'fecha' de RF-11; filtro por fecha en RF-12."
+      archived_at:
+        type: timestamptz
+        constraints: []
+        notes: "Soft-delete (RF-06). NULL = activo, no-NULL = archivado. Nunca se borra físicamente. Reemplaza el booleano `archived` del contrato API con un timestamp (permite saber cuándo se archivó)."
+      created_at:
+        type: timestamptz
+        constraints: [NOT NULL, DEFAULT now()]
+      updated_at:
+        type: timestamptz
+        constraints: [NOT NULL, DEFAULT now()]
+        notes: "No se usa para detección de conflictos: RF-14 es last-write-wins, sin bloqueo optimista ni aviso de conflicto."
+    indexes:
+      - columns: [status]
+        reason: Filtro de tablero y listado de tickets (RF-12, RF-13).
+      - columns: [priority]
+        reason: Filtro de tickets por prioridad (RF-12).
+      - columns: [project_id]
+        reason: Filtro de tickets por proyecto y join con projects (RF-07, RF-12).
+      - columns: [archived_at]
+        reason: Excluir archivados por defecto en listados (ver api-contract.md, GET /projects/:id/tickets).
+
+  ticket_assignees:
+    description: Relación N:M usuario↔ticket para asignación múltiple (RF-10).
+    relation: N:M
+    columns:
+      ticket_id:
+        type: uuid
+        constraints: ["FK→tickets.id", NOT NULL]
+      user_id:
+        type: uuid
+        constraints: ["FK→users.id", NOT NULL]
+      assigned_at:
+        type: timestamptz
+        constraints: [NOT NULL, DEFAULT now()]
+    primary_key: [ticket_id, user_id]
+    indexes:
+      - columns: [user_id]
+        reason: Filtro de tickets por responsable/assignee (RF-12, GET /tickets?assigneeId=).
+
+  tags:
+    description: Catálogo normalizado de etiquetas de texto libre (RF-11). Sin lista predefinida, pero deduplicadas entre tickets.
+    columns:
+      id:
+        type: uuid
+        constraints: [PK, DEFAULT gen_random_uuid()]
+      name:
+        type: text
+        constraints: [NOT NULL, UNIQUE]
+    indexes:
+      - columns: [name]
+        unique: true
+
+  ticket_tags:
+    description: Relación N:M ticket↔etiqueta (RF-11, RF-12).
+    relation: N:M
+    columns:
+      ticket_id:
+        type: uuid
+        constraints: ["FK→tickets.id", NOT NULL]
+      tag_id:
+        type: uuid
+        constraints: ["FK→tags.id", NOT NULL]
+    primary_key: [ticket_id, tag_id]
+    indexes:
+      - columns: [tag_id]
+        reason: Filtro de tickets por etiqueta (RF-12, GET /tickets?tag=).
+
+  comments:
+    description: Comentarios internos dentro de un ticket (RF-15, H11). Relación 1:N ticket→comentario.
+    columns:
+      id:
+        type: uuid
+        constraints: [PK, DEFAULT gen_random_uuid()]
+      ticket_id:
+        type: uuid
+        constraints: ["FK→tickets.id", NOT NULL]
+      author_id:
+        type: uuid
+        constraints: ["FK→users.id", NOT NULL]
+      body:
+        type: text
+        constraints: [NOT NULL]
+      created_at:
+        type: timestamptz
+        constraints: [NOT NULL, DEFAULT now()]
+        notes: Define el orden cronológico del hilo (RF-15).
+    indexes:
+      - columns: [ticket_id, created_at]
+        reason: Listado paginado de comentarios de un ticket en orden cronológico ascendente.
+
+  audit_log:
+    description: Historial de cambios sobre tickets (H2, H4). Traza acciones de Admin sobre tickets ajenos.
+    columns:
+      id:
+        type: uuid
+        constraints: [PK, DEFAULT gen_random_uuid()]
+      ticket_id:
+        type: uuid
+        constraints: ["FK→tickets.id", NOT NULL]
+      actor_id:
+        type: uuid
+        constraints: ["FK→users.id", NOT NULL]
+        notes: Quién realizó la acción.
+      action:
+        type: enum(audit_action)
+        constraints: [NOT NULL]
+      changes:
+        type: jsonb
+        constraints: []
+        notes: Diff simplificado de campos modificados.
+      created_at:
+        type: timestamptz
+        constraints: [NOT NULL, DEFAULT now()]
+    indexes:
+      - columns: [ticket_id, created_at]
+        reason: Listado paginado de auditoría de un ticket en orden descendente (GET /audit/:ticketId).
+    notes:
+      - "immutable: true — esta tabla es solo de inserción (INSERT-only). No se permiten UPDATE ni DELETE sobre filas existentes; se recomienda reforzar con política RLS/trigger que rechace esas operaciones."
+
+  ticket_locks:
+    description: Soft lock informativo de edición (H10). Relación 1:1 con tickets — a lo sumo un lock activo por ticket.
+    relation: "1:1"
+    columns:
+      ticket_id:
+        type: uuid
+        constraints: [PK, "FK→tickets.id"]
+      user_id:
+        type: uuid
+        constraints: ["FK→users.id", NOT NULL]
+        notes: Quién tiene el lock informativo.
+      created_at:
+        type: timestamptz
+        constraints: [NOT NULL, DEFAULT now()]
+    notes:
+      - "Puramente informativo/presencia: NO bloquea PATCH /tickets/:id (ver api-contract.md, 'Regla de locking'). No contradice RF-14 (last-write-wins)."
+      - "PK en ticket_id (no un id propio) refuerza la cardinalidad 1:1: un ticket tiene a lo sumo un lock vigente."
+
+out_of_scope:
+  - "Notificaciones por email (RF-18) — fase 2, sin tabla asociada."
+  - "Dashboard de métricas (RF-19) — fase 2, sin tabla asociada."
+  - "SLA/umbral de rendimiento (RNF-01) — [PENDIENTE] en specs.md, no afecta el modelo de datos."
