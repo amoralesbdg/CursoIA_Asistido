@@ -1,0 +1,1029 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica autogenerada de Mini Jira (API, diagramas, cobertura de tests, base de datos)">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../diagramas/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>API Reference - Mini Jira — Documentación Técnica</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference-mini-jira-mvp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-header__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mini Jira — Documentación Técnica
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../diagramas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Diagramas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cobertura-tests/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cobertura de Tests
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../base-de-datos/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Base de Datos
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-nav__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mini Jira — Documentación Técnica
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#convenciones-generales-segun-el-contrato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Convenciones generales (según el contrato)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla-de-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla de endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tabla de endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#p0-desbloquea-el-kanban" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P0 — desbloquea el Kanban
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p2-pendientes-de-implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P2 ⏳ pendientes de implementación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-curl-endpoints-p0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos curl — endpoints P0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos curl — endpoints P0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-authregister" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /auth/register
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authlogin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /auth/login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /projects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-projectsid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /projects/:id
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-projectsidtickets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /projects/:id/tickets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-ticketsidstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PATCH /tickets/:id/status
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#huecos-de-informacion-detectados-en-el-contrato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Huecos de información detectados en el contrato
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagramas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagramas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cobertura-tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cobertura de Tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../base-de-datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base de Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="api-reference-mini-jira-mvp">API Reference — Mini Jira (MVP)<a class="headerlink" href="#api-reference-mini-jira-mvp" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Generado a partir de <code>docs/api-contract.md</code> (única fuente). No se ha leído código fuente ni otros documentos.</p>
+</blockquote>
+<h2 id="convenciones-generales-segun-el-contrato">Convenciones generales (según el contrato)<a class="headerlink" href="#convenciones-generales-segun-el-contrato" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Envelope de éxito: <code>{ "data": { ... }, "error": null }</code>.</li>
+<li>Envelope de error: RFC 7807 Problem Details nativo (<code>type</code>, <code>title</code>, <code>status</code>, <code>detail</code>, <code>instance</code>).</li>
+<li>Auth: JWT en <code>Authorization: Bearer &lt;token&gt;</code>, emitido por <code>POST /auth/login</code> y <code>POST /auth/register</code>. Todo endpoint salvo <code>/auth/*</code> lo requiere.</li>
+<li>Paginación offset-based: <code>?page=1&amp;pageSize=20</code> (defaults <code>page=1</code>, <code>pageSize=20</code>, máx <code>pageSize=100</code>).</li>
+<li>Tipos de error usados en el contrato: <code>validation-error</code> (400), <code>unauthenticated</code> (401), <code>forbidden</code> (403), <code>not-found</code> (404), <code>duplicate</code> (409), <code>forbidden-transition</code> (409), <code>internal-error</code> (500).</li>
+<li>PENDIENTE: no especificado en api-contract.md — el contrato no indica explícitamente el código de status HTTP de las respuestas exitosas (200 vs 201) para ningún endpoint.</li>
+</ul>
+<hr />
+<h2 id="tabla-de-endpoints">Tabla de endpoints<a class="headerlink" href="#tabla-de-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="p0-desbloquea-el-kanban">P0 — desbloquea el Kanban<a class="headerlink" href="#p0-desbloquea-el-kanban" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Ruta</th>
+<th>Auth</th>
+<th>Body</th>
+<th>Response</th>
+<th>Status codes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td><code>/auth/register</code></td>
+<td>No requiere token</td>
+<td><code>{ username, password, email }</code></td>
+<td><code>{ user: User, token }</code></td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 400 <code>validation-error</code> (falta email); 409 <code>duplicate</code> (username ya existente)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/login</code></td>
+<td>No requiere token</td>
+<td><code>{ username, password }</code></td>
+<td><code>{ user: User, token }</code></td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (credenciales incorrectas)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/projects</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>— (query: <code>page, pageSize</code>)</td>
+<td><code>Paginated&lt;Project&gt;</code></td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global, si falta/token inválido)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/projects/:id</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>—</td>
+<td><code>Project</code></td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 404 <code>not-found</code> (no existe o sin visibilidad); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/projects/:id/tickets</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>— (query: <code>status?</code>)</td>
+<td><code>{ todo: Ticket[], 'in-progress': Ticket[], review: Ticket[], done: Ticket[] }</code> o <code>Ticket[]</code> si se filtra por <code>status</code></td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td><code>/tickets/:id/status</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td><code>{ status: Status }</code></td>
+<td><code>Ticket</code> actualizado</td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 409 <code>forbidden-transition</code> (transición no secuencial); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="p1">P1<a class="headerlink" href="#p1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Ruta</th>
+<th>Auth</th>
+<th>Body</th>
+<th>Response</th>
+<th>Status codes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/users</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>—</td>
+<td><code>User[]</code> (sin <code>password_hash</code>)</td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/tickets</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>— (query: <code>projectId?, priority?, assigneeId?, tag?, dueDateFrom?, dueDateTo?, page, pageSize</code>)</td>
+<td><code>Paginated&lt;Ticket&gt;</code></td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/tickets</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td><code>{ title, description?, projectId, priority, assigneeIds?, tags?, dueDate? }</code></td>
+<td><code>Ticket</code> creado</td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 400 <code>validation-error</code> (falta <code>projectId</code>, o <code>priority</code> fuera de enum); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td><code>/tickets/:id</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>subconjunto de campos editables de <code>Ticket</code></td>
+<td><code>Ticket</code> actualizado</td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 403 <code>forbidden</code> (sin ownership: no es admin, creador ni asignado); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/tickets/:id</code> <em>(soft-delete)</em></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>—</td>
+<td><code>Ticket</code> con <code>archived: true</code></td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 403 <code>forbidden</code> (sin ownership); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/tickets/:id/assignees</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td><code>{ userId }</code></td>
+<td><code>Ticket</code> actualizado</td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/projects</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td><code>{ name, description? }</code></td>
+<td><code>Project</code> creado</td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/projects/:id/members</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td><code>{ userId }</code></td>
+<td><code>Project</code> actualizado</td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 403 <code>forbidden</code> (actor no es creador ni admin); 401 <code>unauthenticated</code> (convención global)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="p2-pendientes-de-implementacion">P2 ⏳ pendientes de implementación<a class="headerlink" href="#p2-pendientes-de-implementacion" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Nota del contrato: "el frontend actual es un prototipo de solo lectura... el resto de endpoints de este contrato (CRUD, comentarios, auditoría, auth, locking) no tiene contraparte en código". Los endpoints de esta sección están, además, clasificados explícitamente como P2 en el contrato.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Ruta</th>
+<th>Auth</th>
+<th>Body</th>
+<th>Response</th>
+<th>Status codes</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td><code>/tickets/:id/lock</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>—</td>
+<td><code>Lock</code></td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global)</td>
+<td>⏳ P2 — pendiente de implementación</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/tickets/:id/lock</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>—</td>
+<td><code>null</code></td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global); no falla si el lock no existe (según contrato)</td>
+<td>⏳ P2 — pendiente de implementación</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/tickets/:id/comments</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>— (query: <code>page, pageSize</code>)</td>
+<td><code>Paginated&lt;Comment&gt;</code> ordenado por <code>createdAt</code> asc</td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global)</td>
+<td>⏳ P2 — pendiente de implementación</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/tickets/:id/comments</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td><code>{ body }</code></td>
+<td><code>Comment</code> creado</td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global)</td>
+<td>⏳ P2 — pendiente de implementación</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/audit/:ticketId</code></td>
+<td><code>Authorization: Bearer {token}</code></td>
+<td>— (query: <code>page, pageSize</code>)</td>
+<td><code>Paginated&lt;AuditEntry&gt;</code> ordenado por <code>createdAt</code> desc</td>
+<td>PENDIENTE: no especificado en api-contract.md (éxito); 401 <code>unauthenticated</code> (convención global)</td>
+<td>⏳ P2 — pendiente de implementación</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ejemplos-curl-endpoints-p0">Ejemplos curl — endpoints P0<a class="headerlink" href="#ejemplos-curl-endpoints-p0" title="Permanent link">&para;</a></h2>
+<h3 id="post-authregister">POST /auth/register<a class="headerlink" href="#post-authregister" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://api.minijira.dev/auth/register<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;username&quot;: &quot;jdoe&quot;,</span>
+<span class="s1">    &quot;password&quot;: &quot;PENDIENTE: no especificado en api-contract.md&quot;,</span>
+<span class="s1">    &quot;email&quot;: &quot;jdoe@example.com&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+<blockquote>
+<p>Nota: el contrato no especifica el host/base URL de la API. PENDIENTE: no especificado en api-contract.md.</p>
+</blockquote>
+<h3 id="post-authlogin">POST /auth/login<a class="headerlink" href="#post-authlogin" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://api.minijira.dev/auth/login<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;username&quot;: &quot;jdoe&quot;,</span>
+<span class="s1">    &quot;password&quot;: &quot;PENDIENTE: no especificado en api-contract.md&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+<h3 id="get-projects">GET /projects<a class="headerlink" href="#get-projects" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://api.minijira.dev/projects?page=1&amp;pageSize=20&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer {token}&quot;</span>
+</code></pre></div>
+<h3 id="get-projectsid">GET /projects/:id<a class="headerlink" href="#get-projectsid" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://api.minijira.dev/projects/{id}&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer {token}&quot;</span>
+</code></pre></div>
+<h3 id="get-projectsidtickets">GET /projects/:id/tickets<a class="headerlink" href="#get-projectsidtickets" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://api.minijira.dev/projects/{id}/tickets&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer {token}&quot;</span>
+</code></pre></div>
+<p>Con filtro por <code>status</code> (según el contrato, <code>status?</code> es opcional):</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://api.minijira.dev/projects/{id}/tickets?status=todo&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer {token}&quot;</span>
+</code></pre></div>
+<h3 id="patch-ticketsidstatus">PATCH /tickets/:id/status<a class="headerlink" href="#patch-ticketsidstatus" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span><span class="s2">&quot;https://api.minijira.dev/tickets/{id}/status&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer {token}&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;status&quot;: &quot;in-progress&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+<hr />
+<h2 id="huecos-de-informacion-detectados-en-el-contrato">Huecos de información detectados en el contrato<a class="headerlink" href="#huecos-de-informacion-detectados-en-el-contrato" title="Permanent link">&para;</a></h2>
+<ul>
+<li>No se especifica el status code HTTP de éxito (200/201/204) para ningún endpoint.</li>
+<li>No se especifica la base URL / host de la API.</li>
+<li>No se especifica el formato o requisitos de <code>password</code> (longitud mínima, reglas, etc.) para <code>POST /auth/register</code> ni <code>POST /auth/login</code>.</li>
+<li>No se incluye un ejemplo completo de <code>Response</code> (payload real) para ningún endpoint, solo la forma del <code>data</code> (tipos de entidad referenciados en la sección "Entidades").</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

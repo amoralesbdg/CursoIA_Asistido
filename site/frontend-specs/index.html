@@ -1,0 +1,1670 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica autogenerada de Mini Jira (API, diagramas, cobertura de tests, base de datos)">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Frontend Specs — Mini Jira (MVP) - Mini Jira — Documentación Técnica</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#frontend-specs-mini-jira-mvp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-header__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mini Jira — Documentación Técnica
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Frontend Specs — Mini Jira (MVP)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../diagramas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Diagramas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cobertura-tests/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cobertura de Tests
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../base-de-datos/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Base de Datos
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-nav__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mini Jira — Documentación Técnica
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagramas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagramas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cobertura-tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cobertura de Tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../base-de-datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base de Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="frontend-specs-mini-jira-mvp">Frontend Specs — Mini Jira (MVP)<a class="headerlink" href="#frontend-specs-mini-jira-mvp" title="Permanent link">&para;</a></h1>
+<p><strong>Estado:</strong> Confirmado por el usuario (contrato de API de la sección 5, autosave/creación explícita, comportamiento de archivados y designación de Admin por backend). No se ha escrito código.
+<strong>Fuentes:</strong> <code>docs/specs.md</code> (PRD), <code>docs/backlog.md</code>, <code>docs/prototype-spec.md</code>, <code>docs/test_plan.md</code>, <code>architecture/architecture.md</code>, <code>architecture/er_diagram.md</code>, <code>docs/adr/001-database-selection.md</code>, <code>prototype/</code> (referencia de comportamiento). No existe <code>design.md</code>.</p>
+<hr />
+<h2 id="1-alcance-y-decisiones">1. Alcance y decisiones<a class="headerlink" href="#1-alcance-y-decisiones" title="Permanent link">&para;</a></h2>
+<h3 id="11-cobertura">1.1 Cobertura<a class="headerlink" href="#11-cobertura" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>En alcance:</strong> RF-01 a RF-17 (auth, roles, proyectos, tickets, asignación múltiple, filtros, tablero, last-write-wins, comentarios, modo oscuro, estética).</li>
+<li><strong>Fuera de alcance:</strong> RF-18 (notificaciones por email), RF-19 (dashboard de métricas). Sin pantallas, rutas ni tipos para ellos.</li>
+</ul>
+<h3 id="12-decisiones-confirmadas">1.2 Decisiones confirmadas<a class="headerlink" href="#12-decisiones-confirmadas" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tema</th>
+<th>Decisión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend</td>
+<td>API REST propia en Node.js (Supabase/Postgres por detrás, ADR-001). El frontend <strong>no</strong> usa <code>supabase-js</code> y no conoce RLS.</td>
+</tr>
+<tr>
+<td>Base de código</td>
+<td>Proyecto nuevo en <code>frontend/</code>. <code>prototype/</code> queda solo como referencia visual y de comportamiento; no se importa código de él.</td>
+</tr>
+<tr>
+<td>Transiciones de estado (RF-13)</td>
+<td>Solo hacia adelante, un paso a la vez: Por hacer → En progreso → Review → Terminado. Retroceso y saltos se rechazan.</td>
+</tr>
+<tr>
+<td>Sesión</td>
+<td>Cookie <code>httpOnly</code> emitida por el backend; el frontend usa <code>credentials: 'include'</code> y nunca lee ni almacena el token.</td>
+</tr>
+<tr>
+<td>Guardado de ticket</td>
+<td>Autosave por campo en edición; last-write-wins sin aviso (RF-14).</td>
+</tr>
+<tr>
+<td>Contrato de API</td>
+<td>Propuesto en la sección 5; el backend deberá cumplirlo o acordar cambios.</td>
+</tr>
+<tr>
+<td>Gestor de paquetes</td>
+<td>npm.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13-contradicciones-en-las-fuentes-y-su-resolucion">1.3 Contradicciones en las fuentes y su resolución<a class="headerlink" href="#13-contradicciones-en-las-fuentes-y-su-resolucion" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Contradicción</th>
+<th>Resolución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>specs.md</code> §3 fija SQLite; ADR-001 y <code>CLAUDE.md</code> eligen Supabase</td>
+<td>Irrelevante para el frontend: solo consume la API REST. Rige el ADR-001.</td>
+</tr>
+<tr>
+<td>RF-13 / backlog H9 rechazan el retroceso; el prototipo permite mover a columnas contiguas en ambos sentidos</td>
+<td>Rige la regla <strong>solo hacia adelante</strong> (decisión del usuario). El menú "Mover a…" solo ofrece el siguiente estado.</td>
+</tr>
+<tr>
+<td><code>prototype-spec.md</code> C.4 deja abierto "autosave o botón Guardar"</td>
+<td>Autosave por campo en edición (ver 8.6).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-stack-y-versiones">2. Stack y versiones<a class="headerlink" href="#2-stack-y-versiones" title="Permanent link">&para;</a></h2>
+<p>Versiones verificadas con <code>npm view</code> el 2026-09-30. Se fijan con <code>^</code> en <code>package.json</code> y se congelan con <code>package-lock.json</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Capa</th>
+<th>Tecnología</th>
+<th>Versión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Runtime de desarrollo</td>
+<td>Node.js (LTS actual) / npm</td>
+<td>Node ≥ 22 LTS; probado con Node 25.9 / npm 11.12</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>React + React DOM</td>
+<td>19.3.0</td>
+</tr>
+<tr>
+<td>Lenguaje</td>
+<td>TypeScript (<code>strict: true</code>)</td>
+<td>7.0.2</td>
+</tr>
+<tr>
+<td>Bundler / dev server</td>
+<td>Vite + <code>@vitejs/plugin-react</code></td>
+<td>8.3.1 / 6.1.1</td>
+</tr>
+<tr>
+<td>Estilos</td>
+<td>Tailwind CSS + <code>@tailwindcss/vite</code></td>
+<td>4.3.3</td>
+</tr>
+<tr>
+<td>Enrutado</td>
+<td>React Router</td>
+<td>8.4.0</td>
+</tr>
+<tr>
+<td>Estado de servidor</td>
+<td>TanStack Query</td>
+<td>5.104.0</td>
+</tr>
+<tr>
+<td>Formularios</td>
+<td>React Hook Form</td>
+<td>7.89.0</td>
+</tr>
+<tr>
+<td>Validación</td>
+<td>Zod + <code>@hookform/resolvers</code></td>
+<td>4.6.5 / 5.9.1</td>
+</tr>
+<tr>
+<td>Drag &amp; drop</td>
+<td><code>@dnd-kit/core</code>, <code>@dnd-kit/sortable</code>, <code>@dnd-kit/utilities</code></td>
+<td>6.3.1 / 10.0.0 / 3.2.2</td>
+</tr>
+<tr>
+<td>Tests unitarios/componentes</td>
+<td>Vitest, Testing Library (<code>react</code>, <code>user-event</code>, <code>jest-dom</code>), jsdom</td>
+<td>5.0.3 / 16.3.3, 14.6.7, 7.0.1 / 30.1.1</td>
+</tr>
+<tr>
+<td>Mock de red en tests</td>
+<td>MSW</td>
+<td>3.0.1</td>
+</tr>
+<tr>
+<td>E2E</td>
+<td><code>@playwright/test</code></td>
+<td>1.63.0</td>
+</tr>
+<tr>
+<td>Accesibilidad</td>
+<td><code>@axe-core/playwright</code></td>
+<td>4.13.0</td>
+</tr>
+<tr>
+<td>Lint / formato</td>
+<td>ESLint, <code>typescript-eslint</code>, <code>eslint-plugin-jsx-a11y</code>, <code>eslint-plugin-react-hooks</code>, Prettier</td>
+<td>10.11.0 / 8.71.0 / 6.10.2 / 7.1.1 / 3.9.9</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Navegadores objetivo:</strong> últimas 2 versiones de Chrome, Edge, Firefox y Safari (se usan <code>&lt;dialog&gt;</code>, <code>color-mix</code> y <code>:has()</code>). El prototipo solo se auditó en Chrome; el MVP debe ejecutar E2E en Chromium, Firefox y WebKit.</p>
+<hr />
+<h2 id="3-dependencias">3. Dependencias<a class="headerlink" href="#3-dependencias" title="Permanent link">&para;</a></h2>
+<h3 id="31-runtime-dependencies">3.1 Runtime (<code>dependencies</code>)<a class="headerlink" href="#31-runtime-dependencies" title="Permanent link">&para;</a></h3>
+<p><code>react</code>, <code>react-dom</code>, <code>react-router</code>, <code>@tanstack/react-query</code>, <code>react-hook-form</code>, <code>zod</code>, <code>@hookform/resolvers</code>, <code>@dnd-kit/core</code>, <code>@dnd-kit/sortable</code>, <code>@dnd-kit/utilities</code>.</p>
+<h3 id="32-desarrollo-devdependencies">3.2 Desarrollo (<code>devDependencies</code>)<a class="headerlink" href="#32-desarrollo-devdependencies" title="Permanent link">&para;</a></h3>
+<p><code>typescript</code>, <code>vite</code>, <code>@vitejs/plugin-react</code>, <code>tailwindcss</code>, <code>@tailwindcss/vite</code>, <code>@types/react</code>, <code>@types/react-dom</code>, <code>vitest</code>, <code>jsdom</code>, <code>@testing-library/react</code>, <code>@testing-library/user-event</code>, <code>@testing-library/jest-dom</code>, <code>msw</code>, <code>@playwright/test</code>, <code>@axe-core/playwright</code>, <code>eslint</code>, <code>typescript-eslint</code>, <code>eslint-plugin-jsx-a11y</code>, <code>eslint-plugin-react-hooks</code>, <code>prettier</code>.</p>
+<h3 id="33-exclusiones-deliberadas">3.3 Exclusiones deliberadas<a class="headerlink" href="#33-exclusiones-deliberadas" title="Permanent link">&para;</a></h3>
+<p>Sin librería de componentes (Material, Chakra, etc.), sin librería de iconos externa ni de fechas (se usa <code>Intl</code> nativo y un set de iconos SVG propio, stroke 1.5px, según <code>prototype-spec.md</code> A.8), sin gestor de estado global (Redux/Zustand): el estado de servidor va en TanStack Query y el de UI en estado local, URL o context.</p>
+<h3 id="34-scripts-npm">3.4 Scripts npm<a class="headerlink" href="#34-scripts-npm" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dev</code></td>
+<td>Vite dev server (proxy <code>/api</code> → backend)</td>
+</tr>
+<tr>
+<td><code>build</code></td>
+<td><code>tsc -b &amp;&amp; vite build</code></td>
+</tr>
+<tr>
+<td><code>preview</code></td>
+<td>Sirve el build</td>
+</tr>
+<tr>
+<td><code>lint</code> / <code>format</code></td>
+<td>ESLint / Prettier</td>
+</tr>
+<tr>
+<td><code>typecheck</code></td>
+<td><code>tsc -b --noEmit</code></td>
+</tr>
+<tr>
+<td><code>test</code> / <code>test:watch</code></td>
+<td>Vitest</td>
+</tr>
+<tr>
+<td><code>e2e</code></td>
+<td>Playwright (Chromium, Firefox, WebKit)</td>
+</tr>
+<tr>
+<td><code>audit:axe</code></td>
+<td>Auditoría axe-core WCAG 2.0/2.1 A + AA, en claro/oscuro × 1280/375 px</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-modelo-de-datos">4. Modelo de datos<a class="headerlink" href="#4-modelo-de-datos" title="Permanent link">&para;</a></h2>
+<p>Tipos del lado cliente (reflejan <code>architecture/er_diagram.md</code>, adaptados al prototipo). Los identificadores son <code>string</code> opacos. Las fechas viajan como ISO 8601; <code>dueDate</code> como <code>YYYY-MM-DD</code>.</p>
+<h3 id="41-enumeraciones">4.1 Enumeraciones<a class="headerlink" href="#41-enumeraciones" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Enum</th>
+<th>Valores (API)</th>
+<th>Etiqueta UI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Role</code></td>
+<td><code>admin</code>, <code>user</code></td>
+<td>Admin, Usuario</td>
+</tr>
+<tr>
+<td><code>Priority</code></td>
+<td><code>high</code>, <code>medium</code>, <code>low</code></td>
+<td>Alta, Media, Baja</td>
+</tr>
+<tr>
+<td><code>Status</code> (orden = columnas)</td>
+<td><code>todo</code>, <code>in-progress</code>, <code>review</code>, <code>done</code></td>
+<td>Por hacer, En progreso, Review, Terminado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-entidades">4.2 Entidades<a class="headerlink" href="#42-entidades" title="Permanent link">&para;</a></h3>
+<p><strong>User</strong></p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>string</td>
+<td>Login (RF-01). Único.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Nombre mostrado (avatar/iniciales)</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>Obligatorio (RF-01)</td>
+</tr>
+<tr>
+<td><code>role</code></td>
+<td><code>Role</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Project</strong></p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>1–80 caracteres</td>
+</tr>
+<tr>
+<td><code>creatorId</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>memberIds</code></td>
+<td>string[]</td>
+<td>Incluye al creador</td>
+</tr>
+<tr>
+<td><code>ticketCount</code></td>
+<td>number</td>
+<td>Tickets no archivados</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ticket</strong></p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td>string</td>
+<td>Legible, p. ej. <code>MJ-12</code> (asignado por el backend; fuente mono)</td>
+</tr>
+<tr>
+<td><code>projectId</code></td>
+<td>string</td>
+<td>Obligatorio, exactamente uno (RF-07)</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>string</td>
+<td>Obligatorio, 1–120</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>Texto plano, opcional</td>
+</tr>
+<tr>
+<td><code>priority</code></td>
+<td><code>Priority</code></td>
+<td>Obligatorio</td>
+</tr>
+<tr>
+<td><code>dueDate</code></td>
+<td>string | null</td>
+<td><code>YYYY-MM-DD</code></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>Status</code></td>
+<td>Por defecto <code>todo</code> al crear</td>
+</tr>
+<tr>
+<td><code>assigneeIds</code></td>
+<td>string[]</td>
+<td>0..N (RF-10)</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>string[]</td>
+<td>Texto libre, sin lista predefinida (RF-11)</td>
+</tr>
+<tr>
+<td><code>creatorId</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>archived</code></td>
+<td>boolean</td>
+<td>Soft-delete (RF-06)</td>
+</tr>
+<tr>
+<td><code>archivedBy</code> / <code>archivedAt</code></td>
+<td>string | null</td>
+<td>Trazabilidad de archivado (RF-05, TC-H2-02)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Comment</strong></p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ticketId</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>authorId</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>body</code></td>
+<td>string</td>
+<td>Texto plano, 1–2000; se respeta el salto de línea</td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td>string</td>
+<td>ISO 8601</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-esquemas-de-validacion-zod">4.3 Esquemas de validación (Zod)<a class="headerlink" href="#43-esquemas-de-validacion-zod" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Formulario</th>
+<th>Reglas (mensajes en español, con sugerencia de corrección — WCAG 3.3.3)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Login</td>
+<td><code>username</code> obligatorio; <code>password</code> obligatoria</td>
+</tr>
+<tr>
+<td>Registro</td>
+<td><code>username</code> 3–30 (<code>[a-zA-Z0-9._-]</code>); <code>email</code> formato válido; <code>password</code> ≥ 8 caracteres</td>
+</tr>
+<tr>
+<td>Proyecto</td>
+<td><code>name</code> obligatorio, ≤ 80; <code>memberIds</code> opcional</td>
+</tr>
+<tr>
+<td>Ticket (creación)</td>
+<td><code>title</code> obligatorio; <code>projectId</code> obligatorio; <code>priority</code> ∈ enum; <code>dueDate</code> fecha válida o vacía; <code>tags</code> sin duplicados (sin distinguir mayúsculas) y ≤ 30 caracteres cada una</td>
+</tr>
+<tr>
+<td>Comentario</td>
+<td><code>body</code> no vacío tras <code>trim()</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-contrato-de-api-esperado">5. Contrato de API esperado<a class="headerlink" href="#5-contrato-de-api-esperado" title="Permanent link">&para;</a></h2>
+<p>Propuesta del frontend al backend. Base <code>/api/v1</code>, JSON, cookie de sesión <code>httpOnly; Secure; SameSite=Lax</code>. El frontend envía <code>credentials: 'include'</code>.</p>
+<h3 id="51-endpoints">5.1 Endpoints<a class="headerlink" href="#51-endpoints" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Método y ruta</th>
+<th>Descripción</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /auth/register</code></td>
+<td><code>{username, name, email, password}</code></td>
+<td>201 <code>User</code> + cookie</td>
+</tr>
+<tr>
+<td><code>POST /auth/login</code></td>
+<td><code>{username, password}</code></td>
+<td>200 <code>User</code> + cookie</td>
+</tr>
+<tr>
+<td><code>POST /auth/logout</code></td>
+<td>Invalida la cookie</td>
+<td>204</td>
+</tr>
+<tr>
+<td><code>GET /auth/me</code></td>
+<td>Sesión actual</td>
+<td>200 <code>User</code> | 401</td>
+</tr>
+<tr>
+<td><code>GET /users</code></td>
+<td>Personas asignables/invitables (id, name, email)</td>
+<td>200 <code>User[]</code></td>
+</tr>
+<tr>
+<td><code>GET /projects</code></td>
+<td>Solo los visibles para el usuario (RF-09); el backend filtra</td>
+<td>200 <code>Project[]</code></td>
+</tr>
+<tr>
+<td><code>POST /projects</code></td>
+<td><code>{name, memberIds}</code></td>
+<td>201 <code>Project</code></td>
+</tr>
+<tr>
+<td><code>PATCH /projects/{id}</code></td>
+<td><code>{name?, memberIds?}</code> (miembros: solo creador/Admin)</td>
+<td>200 <code>Project</code> | 403</td>
+</tr>
+<tr>
+<td><code>GET /projects/{id}/tickets</code></td>
+<td>Query: <code>priority</code> (lista), <code>assigneeId</code> (lista), <code>tag</code> (lista), <code>dueFrom</code>, <code>dueTo</code>, <code>includeArchived</code></td>
+<td>200 <code>Ticket[]</code></td>
+</tr>
+<tr>
+<td><code>POST /tickets</code></td>
+<td>Campos de creación (§4.3)</td>
+<td>201 <code>Ticket</code></td>
+</tr>
+<tr>
+<td><code>GET /tickets/{id}</code></td>
+<td>Detalle</td>
+<td>200 <code>Ticket</code></td>
+</tr>
+<tr>
+<td><code>PATCH /tickets/{id}</code></td>
+<td>Campos parciales (autosave por campo); no admite <code>status</code> ni <code>archived</code></td>
+<td>200 <code>Ticket</code> | 403</td>
+</tr>
+<tr>
+<td><code>PATCH /tickets/{id}/status</code></td>
+<td><code>{status}</code> (solo el siguiente estado)</td>
+<td>200 <code>Ticket</code> | 400 transición inválida | 403</td>
+</tr>
+<tr>
+<td><code>POST /tickets/{id}/archive</code></td>
+<td>Soft-delete; registra <code>archivedBy/At</code></td>
+<td>200 <code>Ticket</code> | 403</td>
+</tr>
+<tr>
+<td><code>POST /tickets/{id}/restore</code></td>
+<td>Restaura</td>
+<td>200 <code>Ticket</code> | 403</td>
+</tr>
+<tr>
+<td><code>GET /tickets/{id}/comments</code></td>
+<td>Orden cronológico ascendente</td>
+<td>200 <code>Comment[]</code></td>
+</tr>
+<tr>
+<td><code>POST /tickets/{id}/comments</code></td>
+<td><code>{body}</code></td>
+<td>201 <code>Comment</code> | 403 si el ticket está archivado</td>
+</tr>
+<tr>
+<td><code>POST /tickets/{id}/assignees/me</code></td>
+<td>Autoasignarse (RF-10) incluso sin permiso de edición</td>
+<td>200 <code>Ticket</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-formato-de-error">5.2 Formato de error<a class="headerlink" href="#52-formato-de-error" title="Permanent link">&para;</a></h3>
+<p><code>{ "error": { "code": string, "message": string, "fields"?: { [campo: string]: string } } }</code></p>
+<table>
+<thead>
+<tr>
+<th>HTTP</th>
+<th>Uso</th>
+<th>Tratamiento en UI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Validación / transición inválida (<code>code: INVALID_TRANSITION</code>)</td>
+<td>Errores por campo, o toast "No se puede saltar columnas"</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Sin sesión o expirada</td>
+<td>Limpiar caché de Query y redirigir a <code>/login</code></td>
+</tr>
+<tr>
+<td>403</td>
+<td>Sin permiso</td>
+<td>Toast "No tienes permiso para esta acción"; revertir optimista</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Recurso inexistente o no visible</td>
+<td>Pantalla "No encontrado"</td>
+</tr>
+<tr>
+<td>409</td>
+<td><strong>No se usa</strong> (RF-14: last-write-wins, sin detección de conflicto)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>5xx / red</td>
+<td>Fallo</td>
+<td>Mensaje claro + botón "Reintentar"</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-arquitectura-de-componentes">6. Arquitectura de componentes<a class="headerlink" href="#6-arquitectura-de-componentes" title="Permanent link">&para;</a></h2>
+<h3 id="61-capas">6.1 Capas<a class="headerlink" href="#61-capas" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong><code>app/</code></strong> — bootstrap, providers (<code>QueryClientProvider</code>, <code>RouterProvider</code>, <code>ThemeProvider</code>, <code>ToastProvider</code>, <code>AuthProvider</code>).</li>
+<li><strong><code>routes/</code></strong> — definición de rutas, layouts y guards.</li>
+<li><strong><code>features/*</code></strong> — pantallas y lógica por dominio (hooks de datos, componentes específicos, esquemas). Una feature no importa de otra salvo vía su <code>index.ts</code>.</li>
+<li><strong><code>components/ui/</code></strong> — primitivas de diseño sin conocimiento de dominio.</li>
+<li><strong><code>lib/</code></strong> — cliente HTTP, permisos, reglas de transición, utilidades.</li>
+</ol>
+<h3 id="62-rutas">6.2 Rutas<a class="headerlink" href="#62-rutas" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ruta</th>
+<th>Acceso</th>
+<th>Pantalla</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/login</code>, <code>/registro</code></td>
+<td>Solo sin sesión (con sesión → <code>/proyectos</code>)</td>
+<td><code>AuthScreen</code> (C.1)</td>
+</tr>
+<tr>
+<td><code>/proyectos</code></td>
+<td>Autenticado</td>
+<td><code>ProjectsScreen</code> (C.2)</td>
+</tr>
+<tr>
+<td><code>/proyectos/:projectId</code></td>
+<td>Autenticado y proyecto visible</td>
+<td><code>BoardScreen</code> (C.3, C.5)</td>
+</tr>
+<tr>
+<td><code>/proyectos/:projectId/tickets/:ticketId</code></td>
+<td>Ídem</td>
+<td><code>BoardScreen</code> + <code>TicketPanel</code> (C.4, C.6); enlace profundo</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>—</td>
+<td><code>NotFound</code></td>
+</tr>
+</tbody>
+</table>
+<p>El panel de ticket y los filtros viven en la URL (<code>?prioridad=&amp;responsable=&amp;etiqueta=&amp;desde=&amp;hasta=</code>) para que sean compartibles y sobrevivan a recargas.</p>
+<h3 id="63-arbol-de-componentes">6.3 Árbol de componentes<a class="headerlink" href="#63-arbol-de-componentes" title="Permanent link">&para;</a></h3>
+<p><strong><code>components/ui/</code></strong> (nombres alineados con <code>prototype-spec.md</code>): <code>Button</code>, <code>TextInput</code>, <code>PasswordInput</code>, <code>TextArea</code>, <code>Select</code>, <code>SegmentedControl</code>, <code>DatePicker</code>, <code>Modal</code> (sobre <code>&lt;dialog&gt;</code>, con trampa y devolución de foco), <code>SidePanel</code>, <code>Toast</code>, <code>Skeleton</code>, <code>EmptyState</code>, <code>ErrorState</code>, <code>Avatar</code>, <code>AvatarStack</code>, <code>Badge</code> (prioridad / estado / Archivado), <code>Chip</code>, <code>Icon</code>, <code>Tooltip</code>, <code>Combobox</code>, <code>ThemeToggle</code>, <code>VisuallyHidden</code>.</p>
+<p><strong><code>features/auth</code>:</strong> <code>AuthScreen</code> → <code>AuthCard</code> → <code>LoginForm</code> | <code>RegisterForm</code>; <code>AuthProvider</code>, <code>useSession</code>, <code>RequireAuth</code>, <code>RedirectIfAuth</code>.</p>
+<p><strong><code>features/projects</code>:</strong> <code>ProjectsScreen</code> → <code>ProjectGrid</code> → <code>ProjectCard</code>; <code>ProjectFormModal</code> (+ <code>MemberPicker</code>); estados skeleton / vacío / error.</p>
+<p><strong><code>features/board</code>:</strong> <code>BoardScreen</code> → <code>BoardHeader</code>, <code>FilterBar</code> (<code>FilterDropdown</code> × 5, <code>FilterChip</code>, <code>ClearFiltersButton</code>, <code>FilterSheet</code> móvil), <code>Board</code> (<code>DndContext</code>) → <code>BoardColumn</code> × 4 → <code>TicketCard</code>; <code>MoveMenu</code> ("Mover a…", alternativa por teclado); <code>EmptyColumnState</code>.</p>
+<p><strong><code>features/tickets</code>:</strong> <code>TicketPanel</code> → <code>TicketFields</code> (<code>TitleField</code>, <code>DescriptionField</code>, <code>PrioritySelect</code>, <code>DueDateField</code>, <code>AssigneePicker</code>, <code>ProjectSelect</code>, <code>TagInput</code>, <code>StatusBadge</code>), <code>SaveIndicator</code>, <code>ArchiveButton</code> / <code>RestoreButton</code>, <code>NewTicketForm</code>.</p>
+<p><strong><code>features/comments</code>:</strong> <code>CommentSection</code> → <code>CommentList</code> → <code>CommentItem</code>; <code>CommentComposer</code>.</p>
+<p><strong><code>features/theme</code>:</strong> <code>ThemeProvider</code>, <code>useTheme</code> (Claro / Oscuro / Sistema).</p>
+<h3 id="64-estado">6.4 Estado<a class="headerlink" href="#64-estado" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Herramienta</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Servidor</td>
+<td>TanStack Query</td>
+<td>Claves: <code>['me']</code>, <code>['users']</code>, <code>['projects']</code>, <code>['tickets', projectId, filters]</code>, <code>['ticket', id]</code>, <code>['comments', ticketId]</code></td>
+</tr>
+<tr>
+<td>Sesión</td>
+<td><code>['me']</code> + <code>AuthProvider</code></td>
+<td>401 en cualquier request → limpiar caché y redirigir</td>
+</tr>
+<tr>
+<td>Filtros</td>
+<td>URL (<code>useSearchParams</code>)</td>
+<td>Fuente única de verdad</td>
+</tr>
+<tr>
+<td>Panel abierto</td>
+<td>URL (ruta anidada)</td>
+<td></td>
+</tr>
+<tr>
+<td>Tema</td>
+<td>Context + <code>localStorage</code></td>
+<td>Valores <code>light</code> | <code>dark</code> | <code>system</code></td>
+</tr>
+<tr>
+<td>UI efímera (menús, toasts)</td>
+<td>Estado local / context</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mutaciones:</strong>
+- <em>Mover ticket:</em> actualización <strong>optimista</strong> (mueve la tarjeta), rollback + toast si falla (400/403), invalidación de <code>['tickets', projectId]</code> al asentarse.
+- <em>Autosave de campo:</em> ver 8.6.
+- <em>Crear / archivar / restaurar / comentar:</em> no optimistas; invalidan las claves afectadas. Comentar conserva el texto si falla.</p>
+<h3 id="65-cliente-http">6.5 Cliente HTTP<a class="headerlink" href="#65-cliente-http" title="Permanent link">&para;</a></h3>
+<p>Un único módulo <code>lib/api/client.ts</code> (wrapper de <code>fetch</code>): base <code>/api/v1</code>, <code>credentials: 'include'</code>, parseo de errores al formato de 5.2 en un <code>ApiError</code> tipado. Sin lógica de negocio. Los hooks de cada feature (<code>useProjects</code>, <code>useTickets</code>, …) son la única capa que llama al cliente.</p>
+<hr />
+<h2 id="7-estructura-de-carpetas">7. Estructura de carpetas<a class="headerlink" href="#7-estructura-de-carpetas" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>frontend/
+├─ index.html
+├─ package.json / package-lock.json
+├─ tsconfig.json  vite.config.ts  vitest.config.ts  playwright.config.ts
+├─ eslint.config.js  .prettierrc
+├─ e2e/                    # Playwright: flujos de test_plan.md
+├─ audit/                  # axe.mjs
+└─ src/
+   ├─ main.tsx
+   ├─ app/                 # providers, App.tsx
+   ├─ routes/              # router.tsx, guards, NotFound
+   ├─ features/
+   │  ├─ auth/             # components/, api.ts, schemas.ts, useSession.ts
+   │  ├─ projects/
+   │  ├─ board/            # components/, filters.ts, useBoardDnd.ts
+   │  ├─ tickets/
+   │  ├─ comments/
+   │  └─ theme/
+   ├─ components/ui/       # primitivas reutilizables
+   ├─ lib/
+   │  ├─ api/              # client.ts, ApiError, endpoints por recurso
+   │  ├─ permissions.ts    # canEditTicket, canArchive, canMove, canManageMembers
+   │  ├─ transitions.ts    # STATUSES, nextStatus(), isValidTransition()
+   │  ├─ dates.ts  format.ts
+   │  └─ queryClient.ts
+   ├─ types/               # User, Project, Ticket, Comment, enums
+   ├─ styles/              # index.css: tokens, @theme inline, foco, reduced-motion
+   └─ test/                # setup.ts, msw handlers, factories
+</code></pre></div>
+<p>Convenciones: componentes en <code>PascalCase.tsx</code>, hooks <code>useX.ts</code>, tests junto al archivo (<code>X.test.tsx</code>), un componente por archivo, exportaciones nombradas.</p>
+<hr />
+<h2 id="8-reglas-de-negocio">8. Reglas de negocio<a class="headerlink" href="#8-reglas-de-negocio" title="Permanent link">&para;</a></h2>
+<p><code>permissions.ts</code> y <code>transitions.ts</code> son <strong>funciones puras</strong>, únicas fuentes de verdad en el cliente, y se cubren con tests unitarios. El backend es la autoridad final (la UI oculta/deshabilita por usabilidad, no por seguridad).</p>
+<h3 id="81-permisos">8.1 Permisos<a class="headerlink" href="#81-permisos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Acción</th>
+<th>Admin</th>
+<th>Usuario: creador del ticket</th>
+<th>Usuario: asignado</th>
+<th>Usuario: otro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver tickets de un proyecto visible</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí (si ve el proyecto)</td>
+</tr>
+<tr>
+<td>Editar ticket (RF-03, RF-04)</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No (solo lectura)</td>
+</tr>
+<tr>
+<td>Mover de estado (RF-03, RF-04)</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Archivar / restaurar (RF-05)</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Autoasignarse (RF-10)</td>
+<td>Sí</td>
+<td>—</td>
+<td>—</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Asignar a otros (RF-10)</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No (solo edición permitida)</td>
+</tr>
+<tr>
+<td>Comentar</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí, si ve el ticket y no está archivado</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Acción sobre proyecto</th>
+<th>Admin</th>
+<th>Creador</th>
+<th>Miembro</th>
+<th>Otro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver (RF-09)</td>
+<td>Todos</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No aparece en el listado</td>
+</tr>
+<tr>
+<td>Crear (RF-08)</td>
+<td>Sí</td>
+<td>—</td>
+<td>Sí (cualquier usuario)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Editar nombre</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Gestionar miembros (RF-09-bis)</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No (lista en solo lectura)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-visibilidad-de-proyectos-rf-09">8.2 Visibilidad de proyectos (RF-09)<a class="headerlink" href="#82-visibilidad-de-proyectos-rf-09" title="Permanent link">&para;</a></h3>
+<p>El frontend muestra exactamente lo que devuelve <code>GET /projects</code>. El Admin ve un <code>RoleBadge</code> ("Creado por {nombre}") en proyectos que no creó. Un proyecto no visible devuelve 404 en su ruta.</p>
+<h3 id="83-transicion-de-estado-rf-13">8.3 Transición de estado (RF-13)<a class="headerlink" href="#83-transicion-de-estado-rf-13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Orden fijo: <code>todo → in-progress → review → done</code>.</li>
+<li><code>nextStatus(s)</code> devuelve el siguiente o <code>null</code> en <code>done</code>. <code>isValidTransition(from, to)</code> es cierto solo si <code>to === nextStatus(from)</code>.</li>
+<li><strong>Drag &amp; drop (dnd-kit):</strong> las columnas soltables válidas (solo la siguiente) se resaltan con borde <code>--color-accent</code>. Soltar en cualquier otra columna cancela el movimiento: la tarjeta vuelve a su lugar y se muestra el toast "Solo puedes mover el ticket a la siguiente columna" (saltos y retrocesos).</li>
+<li><strong>Teclado/lector de pantalla:</strong> <code>MoveMenu</code> ("Mover a…") ofrece únicamente la opción "{siguiente estado}"; en <code>done</code> no hay opciones y se indica "Este ticket ya está terminado". dnd-kit con <code>KeyboardSensor</code> y anuncios <code>aria-live</code> configurados en español.</li>
+<li><strong>Táctil:</strong> <code>TouchSensor</code> de dnd-kit con retardo de activación de 200 ms; <code>MoveMenu</code> sigue disponible.</li>
+<li>Sin permiso (8.1): la tarjeta no es arrastrable, cursor <code>not-allowed</code> y tooltip "No tienes permiso para mover este ticket".</li>
+<li>Un 400 <code>INVALID_TRANSITION</code> del servidor (p. ej. otro usuario movió el ticket antes) revierte el cambio optimista y refresca el tablero.</li>
+</ul>
+<h3 id="84-archivado-soft-delete-rf-05-rf-06">8.4 Archivado / soft-delete (RF-05, RF-06)<a class="headerlink" href="#84-archivado-soft-delete-rf-05-rf-06" title="Permanent link">&para;</a></h3>
+<ul>
+<li>El botón se llama <strong>"Eliminar"</strong> (acción real: archivar; no hay borrado físico). Pide confirmación en un diálogo.</li>
+<li>Por defecto el tablero <strong>no</strong> muestra tickets archivados. Un conmutador "Mostrar archivados" (en <code>FilterBar</code>) envía <code>includeArchived=true</code>; estos se ven atenuados con <code>Badge</code> "Archivado".</li>
+<li>En un ticket archivado: campos deshabilitados, sin mover, sin comentar (comentar exige restaurar); el botón pasa a <strong>"Restaurar"</strong> para quien tenga permiso.</li>
+<li>Se muestra "Archivado por {nombre} · {fecha}" (trazabilidad, sobre todo cuando lo hizo un Admin).</li>
+</ul>
+<h3 id="85-filtros-rf-12">8.5 Filtros (RF-12)<a class="headerlink" href="#85-filtros-rf-12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Campos: fecha (rango <code>dueFrom</code>–<code>dueTo</code>), prioridad, responsable, proyecto, etiquetas.</li>
+<li>Combinación <strong>AND</strong> entre campos. Dentro de un campo: <strong>prioridad = OR</strong> (un ticket tiene una sola), <strong>responsables y etiquetas = AND</strong> (decisión ya tomada en el prototipo, <code>PLAN.md</code>).</li>
+<li>El filtro de <strong>proyecto</strong> cambia el proyecto mostrado (la ruta <code>/proyectos/:projectId</code>); solo lista proyectos visibles.</li>
+<li>Autocompletado de etiquetas con las existentes en el proyecto; se admite texto libre.</li>
+<li>Chips removibles por filtro activo y "Limpiar filtros" (solo visible si hay alguno). En &lt; 768 px los controles se agrupan en un <code>FilterSheet</code> con contador.</li>
+<li>Sin resultados: "Ningún ticket coincide con los filtros" + "Limpiar filtros" destacado.</li>
+</ul>
+<h3 id="86-autosave-por-campo-rf-14">8.6 Autosave por campo (RF-14)<a class="headerlink" href="#86-autosave-por-campo-rf-14" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Aplica <strong>solo a edición</strong> de un ticket existente. La <strong>creación</strong> usa un botón explícito "Crear ticket" (un ticket no existe hasta entonces). <em>Ver punto abierto P-1.</em></li>
+<li>Campos de texto (título, descripción): se guardan al perder el foco, con <em>debounce</em> de 800 ms mientras se escribe. Selectores, fecha, prioridad, asignados y etiquetas: se guardan al cambiar.</li>
+<li>Se envía <code>PATCH /tickets/{id}</code> con <strong>solo el campo modificado</strong>.</li>
+<li><code>SaveIndicator</code> (región <code>role="status"</code>, <code>aria-live="polite"</code>): "Guardando…" → "Guardado" → "No se pudo guardar · Reintentar". Un campo inválido (p. ej. título vacío) no se envía y muestra su error inline.</li>
+<li><strong>Last-write-wins:</strong> no hay control de versión, ni banner de "alguien más editó", ni manejo de 409. La respuesta del servidor reemplaza el valor local del campo guardado; los demás campos en edición no se pisan.</li>
+<li>Al cerrar el panel se fuerza el guardado de campos pendientes.</li>
+</ul>
+<h3 id="87-ticket">8.7 Ticket<a class="headerlink" href="#87-ticket" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Proyecto obligatorio y único. Al crear desde el tablero de un proyecto, viene preseleccionado; <code>ProjectSelect</code> solo lista proyectos visibles.</li>
+<li>Prioridad solo <code>Alta | Media | Baja</code>; nunca se envía otro valor.</li>
+<li>Etiquetas: texto libre; se añaden con <code>Enter</code> o coma; sin duplicados; eliminables.</li>
+<li>Asignados: múltiples (<code>AssigneePicker</code> combobox con búsqueda por nombre/email sobre <code>GET /users</code>). El estado inicial de un ticket nuevo es <code>todo</code>.</li>
+<li>Un usuario sin permiso de edición ve el panel en solo lectura, con la única acción habilitada "Asignarme".</li>
+</ul>
+<h3 id="88-comentarios-rf-15">8.8 Comentarios (RF-15)<a class="headerlink" href="#88-comentarios-rf-15" title="Permanent link">&para;</a></h3>
+<p>Orden cronológico ascendente; timestamp relativo ("hace 2 h") con la fecha completa en <code>title</code>/<code>&lt;time datetime&gt;</code>. Composer deshabilitado si está vacío; en fallo conserva el texto y muestra "Reintentar". Menciones <code>@</code> son texto plano (sin autocompletado ni notificación). Editar/borrar comentarios queda fuera del MVP.</p>
+<h3 id="89-autenticacion-rf-01">8.9 Autenticación (RF-01)<a class="headerlink" href="#89-autenticacion-rf-01" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Registro: usuario, nombre, email (obligatorio) y contraseña. Errores de campo inline; duplicado de usuario → "Ese usuario ya existe. Prueba con otro nombre."</li>
+<li>Login: error genérico "Usuario o contraseña incorrectos" (no revela cuál falló).</li>
+<li>Tras autenticarse → <code>/proyectos</code>. Cerrar sesión desde el menú de usuario del shell. Sin "recordarme" ni recuperación de contraseña (no están en <code>specs.md</code>).</li>
+<li>Quién es Admin lo decide el backend; el registro <strong>no</strong> permite elegir rol.</li>
+</ul>
+<h3 id="810-tema-rf-16">8.10 Tema (RF-16)<a class="headerlink" href="#810-tema-rf-16" title="Permanent link">&para;</a></h3>
+<p>Tres opciones: Claro, Oscuro, Sistema (por defecto, respeta <code>prefers-color-scheme</code>). Preferencia persistida en <code>localStorage</code> (con <code>try/catch</code>). El atributo <code>data-theme</code> se aplica antes del primer render para evitar parpadeo. Transición <code>--duration-slow</code>, desactivada con <code>prefers-reduced-motion</code>. <code>ThemeToggle</code> visible también en pantallas de login/registro.</p>
+<h3 id="811-idioma-y-formato">8.11 Idioma y formato<a class="headerlink" href="#811-idioma-y-formato" title="Permanent link">&para;</a></h3>
+<p>Interfaz solo en español; textos literales en los componentes (sin librería de i18n en el MVP). Fechas y números con <code>Intl</code> y <code>es</code>. Zona horaria: la del navegador; <code>dueDate</code> se trata como fecha sin hora.</p>
+<hr />
+<h2 id="9-sistema-de-diseno-y-accesibilidad">9. Sistema de diseño y accesibilidad<a class="headerlink" href="#9-sistema-de-diseno-y-accesibilidad" title="Permanent link">&para;</a></h2>
+<p>Rigen sin cambios <strong><code>docs/prototype-spec.md</code> secciones A (tokens) y B (WCAG 2.1 AA)</strong>: colores, tipografía, espaciado, radios/sombras, movimiento, breakpoints (480/768/1024/1440) e iconografía. Se implementan como CSS variables en <code>src/styles/index.css</code>, mapeadas a Tailwind v4 con <code>@theme inline</code>.</p>
+<p><strong>Correcciones de contraste que el MVP hereda</strong> (el spec literal no cumple AA; validadas en el prototipo):</p>
+<table>
+<thead>
+<tr>
+<th>Spec literal</th>
+<th>Ratio</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Texto blanco sobre <code>blue-500</code></td>
+<td>3.65:1</td>
+<td>Botones/links usan <code>blue-600</code> vía <code>--color-accent-action</code> (5.57:1); <code>blue-500</code> solo para foco</td>
+</tr>
+<tr>
+<td>Error en <code>red-500</code> sobre blanco</td>
+<td>3.55:1</td>
+<td><code>--color-danger-text: #c4001a</code> (dark <code>#ff6961</code>)</td>
+</tr>
+<tr>
+<td>Borde de input <code>gray-300</code></td>
+<td>1.47:1</td>
+<td><code>--color-border-input: gray-500</code> (dark <code>#7b8088</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Requisitos transversales:</strong> base <code>rem</code> = 16 px y <code>body</code> 15 px; foco visible global (<code>outline: 2px solid var(--color-accent)</code>); <code>&lt;label&gt;</code> visible en todo input; un <code>h1</code> por vista; objetivos táctiles ≥ 24×24 px; reflow a 320 px y zoom 200 %; <code>prefers-reduced-motion</code>; color nunca como único portador de significado; <code>Esc</code> cierra diálogos y devuelve el foco.</p>
+<hr />
+<h2 id="10-estados-transversales">10. Estados transversales<a class="headerlink" href="#10-estados-transversales" title="Permanent link">&para;</a></h2>
+<p>Toda vista con datos remotos define explícitamente (<code>prototype-spec.md</code> B.6):</p>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Comportamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cargando</td>
+<td><code>Skeleton</code> con la forma del contenido final</td>
+</tr>
+<tr>
+<td>Vacío</td>
+<td>Mensaje + acción primaria (p. ej. "Aún no tienes proyectos" + "Crear proyecto")</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>Mensaje claro + "Reintentar" (<code>ErrorState</code>)</td>
+</tr>
+<tr>
+<td>Restringido por rol</td>
+<td>Control oculto, o deshabilitado con tooltip que explica el motivo</td>
+</tr>
+</tbody>
+</table>
+<p>Mensajes de confirmación y error transitorios: <code>Toast</code> (<code>role="status"</code> / <code>role="alert"</code>).</p>
+<hr />
+<h2 id="11-estrategia-de-pruebas-y-calidad">11. Estrategia de pruebas y calidad<a class="headerlink" href="#11-estrategia-de-pruebas-y-calidad" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Herramienta</th>
+<th>Qué cubre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unitario</td>
+<td>Vitest</td>
+<td><code>permissions.ts</code>, <code>transitions.ts</code>, esquemas Zod, <code>filters</code>, utilidades de fecha</td>
+</tr>
+<tr>
+<td>Componente</td>
+<td>Vitest + Testing Library + MSW</td>
+<td>Formularios (errores y mensajes), <code>TicketCard</code>, <code>MoveMenu</code>, <code>FilterBar</code>, autosave y <code>SaveIndicator</code>, <code>CommentComposer</code></td>
+</tr>
+<tr>
+<td>E2E</td>
+<td>Playwright (Chromium, Firefox, WebKit)</td>
+<td>Casos de <code>docs/test_plan.md</code> por Historia: H1 auth, H2–H4 permisos/archivado, H5 proyectos, H6–H7 ticket/asignados, H8 filtros, H9 transiciones (salto y retroceso rechazados), H10 last-write-wins, H11 comentarios, H12 tema</td>
+</tr>
+<tr>
+<td>Accesibilidad</td>
+<td><code>@axe-core/playwright</code></td>
+<td>0 violaciones WCAG 2.0/2.1 A+AA en claro/oscuro × 1280/375 px, cubriendo los estados de las secciones C.1–C.7; comprobaciones de teclado, reflow 320 px y zoom 200 %</td>
+</tr>
+<tr>
+<td>Estático</td>
+<td><code>tsc --noEmit</code>, ESLint (<code>jsx-a11y</code>, <code>react-hooks</code>), Prettier</td>
+<td>Sin errores ni warnings en CI</td>
+</tr>
+</tbody>
+</table>
+<p>Las E2E corren contra el backend real o un servidor de pruebas que cumpla el contrato de la sección 5; los tests de componente usan MSW con ese mismo contrato.</p>
+<p><strong>Criterio de "hecho" por pantalla:</strong> estados del spec implementados (cargando, vacío, error, restringido), operable solo con teclado, contraste verificado en ambos temas, responsive hasta 320 px, <code>typecheck</code>/<code>lint</code>/<code>test</code> en verde, axe sin violaciones.</p>
+<p><strong>Pendiente de validación manual (no automatizable):</strong> lector de pantalla real (VoiceOver/NVDA) y táctil real.</p>
+<hr />
+<h2 id="12-trazabilidad-rf-frontend">12. Trazabilidad RF → Frontend<a class="headerlink" href="#12-trazabilidad-rf-frontend" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>RF</th>
+<th>Cubierto en</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RF-01</td>
+<td>§4.3, §5.1 (auth), §8.9, <code>features/auth</code></td>
+</tr>
+<tr>
+<td>RF-02, RF-03</td>
+<td>§8.1, <code>permissions.ts</code></td>
+</tr>
+<tr>
+<td>RF-04, RF-05</td>
+<td>§8.1, §8.4</td>
+</tr>
+<tr>
+<td>RF-06</td>
+<td>§8.4</td>
+</tr>
+<tr>
+<td>RF-07</td>
+<td>§4.2, §8.7</td>
+</tr>
+<tr>
+<td>RF-08, RF-09, RF-09-bis</td>
+<td>§8.1, §8.2, <code>features/projects</code></td>
+</tr>
+<tr>
+<td>RF-10</td>
+<td>§8.1, §8.7 (<code>AssigneePicker</code>, <code>/assignees/me</code>)</td>
+</tr>
+<tr>
+<td>RF-11</td>
+<td>§4.2, §8.7</td>
+</tr>
+<tr>
+<td>RF-12</td>
+<td>§8.5</td>
+</tr>
+<tr>
+<td>RF-13</td>
+<td>§8.3, <code>transitions.ts</code></td>
+</tr>
+<tr>
+<td>RF-14</td>
+<td>§8.6</td>
+</tr>
+<tr>
+<td>RF-15</td>
+<td>§8.8</td>
+</tr>
+<tr>
+<td>RF-16</td>
+<td>§8.10</td>
+</tr>
+<tr>
+<td>RF-17</td>
+<td>§9</td>
+</tr>
+<tr>
+<td>RF-18, RF-19</td>
+<td>Fuera de alcance (§1.1)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-puntos-abiertos">13. Puntos abiertos<a class="headerlink" href="#13-puntos-abiertos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Punto</th>
+<th>Propuesta en este documento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P-1</td>
+<td>~~El autosave por campo solo tiene sentido en tickets existentes~~</td>
+<td><strong>Resuelto:</strong> autosave solo en edición; la creación usa el botón explícito "Crear ticket"</td>
+</tr>
+<tr>
+<td>P-2</td>
+<td><code>GET /users</code> expone a todos nombre y email</td>
+<td>Se asume aceptable (empresa de ~10 personas); el backend puede restringirlo</td>
+</tr>
+<tr>
+<td>P-3</td>
+<td>~~Quién es el primer Admin y cómo se promueve a otros~~</td>
+<td><strong>Resuelto:</strong> lo decide el backend; fuera del frontend</td>
+</tr>
+<tr>
+<td>P-4</td>
+<td><code>[PENDIENTE]</code> SLA de rendimiento (RNF-01)</td>
+<td>Sin métricas ni presupuestos de rendimiento hasta que se defina</td>
+</tr>
+<tr>
+<td>P-5</td>
+<td>Política de CORS/dominio para cookies <code>SameSite=Lax</code></td>
+<td>En desarrollo se usa el proxy de Vite (<code>/api</code>) para ser same-origin; en producción, servir SPA y API bajo el mismo sitio</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

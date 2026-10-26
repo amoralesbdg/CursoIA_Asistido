@@ -1,48 +1,105 @@
-import { useMemo } from 'react'
-import { create } from 'zustand'
-import { tickets as initialTickets } from '../mocks'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import type { QueryClient, QueryKey } from '@tanstack/react-query'
 import { STATUSES } from '../mocks/types'
 import type { Status, Ticket } from '../mocks/types'
-import { simulatePatchStatus } from './simulateNetwork'
+import { getProjectTickets, updateTicketStatus } from '../lib/api'
+
+type GroupedTickets = Record<Status, Ticket[]>
+
+const EMPTY_GROUPED = Object.fromEntries(
+  STATUSES.map(({ id }) => [id, [] as Ticket[]]),
+) as GroupedTickets
+
+function projectTicketsQueryKey(projectId: string) {
+  return ['projectTickets', projectId] as const
+}
+
+export function useTicketsByStatus(projectId: string): GroupedTickets {
+  const { data } = useQuery({
+    queryKey: projectTicketsQueryKey(projectId),
+    queryFn: () => getProjectTickets(projectId),
+  })
+  return data ?? EMPTY_GROUPED
+}
+
+function findCachedTicket(
+  queryClient: QueryClient,
+  ticketId: string,
+): { queryKey: QueryKey; grouped: GroupedTickets; ticket: Ticket } | null {
+  const cached = queryClient.getQueriesData<GroupedTickets>({ queryKey: ['projectTickets'] })
+  for (const [queryKey, grouped] of cached) {
+    if (!grouped) continue
+    for (const list of Object.values(grouped)) {
+      const ticket = list.find((t) => t.id === ticketId)
+      if (ticket) return { queryKey, grouped, ticket }
+    }
+  }
+  return null
+}
+
+function withTicketUpserted(grouped: GroupedTickets, ticket: Ticket): GroupedTickets {
+  const next: GroupedTickets = { ...grouped }
+  for (const status of Object.keys(next) as Status[]) {
+    next[status] = next[status].filter((t) => t.id !== ticket.id)
+  }
+  next[ticket.status] = [...next[ticket.status], ticket]
+  return next
+}
+
+interface MoveTicketVars {
+  ticketId: string
+  newStatus: Status
+}
+
+interface MoveTicketContext {
+  queryKey: QueryKey
+  previous: GroupedTickets
+}
 
 interface BoardState {
-  tickets: Ticket[]
   moveTicket: (ticketId: string, newStatus: Status) => void
 }
 
-export const useBoardStore = create<BoardState>((set, get) => ({
-  tickets: initialTickets,
+export function useBoardStore<T>(selector: (state: BoardState) => T): T {
+  const queryClient = useQueryClient()
 
-  moveTicket: (ticketId, newStatus) => {
-    const previousTickets = get().tickets
-    const ticket = previousTickets.find((t) => t.id === ticketId)
-    if (!ticket || ticket.status === newStatus) return
+  const mutation = useMutation<Ticket, unknown, MoveTicketVars, MoveTicketContext | undefined>({
+    mutationFn: ({ ticketId, newStatus }) => updateTicketStatus(ticketId, newStatus),
 
-    set({
-      tickets: previousTickets.map((t) => (t.id === ticketId ? { ...t, status: newStatus } : t)),
-    })
+    onMutate: async ({ ticketId, newStatus }) => {
+      const found = findCachedTicket(queryClient, ticketId)
+      if (!found) return undefined
 
-    simulatePatchStatus().catch(() => {
-      set({ tickets: previousTickets })
-    })
-  },
-}))
+      const { queryKey, grouped, ticket } = found
+      await queryClient.cancelQueries({ queryKey })
 
-function groupByStatus(tickets: Ticket[]): Record<Status, Ticket[]> {
-  const grouped = Object.fromEntries(STATUSES.map(({ id }) => [id, [] as Ticket[]])) as Record<
-    Status,
-    Ticket[]
-  >
-  for (const ticket of tickets) {
-    grouped[ticket.status].push(ticket)
+      queryClient.setQueryData<GroupedTickets>(
+        queryKey,
+        withTicketUpserted(grouped, { ...ticket, status: newStatus }),
+      )
+
+      return { queryKey, previous: grouped }
+    },
+
+    onError: (_err, _vars, context) => {
+      if (context) queryClient.setQueryData(context.queryKey, context.previous)
+    },
+
+    onSuccess: (updatedTicket, _vars, context) => {
+      const queryKey = context?.queryKey ?? projectTicketsQueryKey(updatedTicket.projectId)
+      queryClient.setQueryData<GroupedTickets>(queryKey, (current) =>
+        current ? withTicketUpserted(current, updatedTicket) : current,
+      )
+    },
+  })
+
+  const state: BoardState = {
+    moveTicket: (ticketId, newStatus) => {
+      const found = findCachedTicket(queryClient, ticketId)
+      if (!found || found.ticket.status === newStatus) return
+      mutation.mutate({ ticketId, newStatus })
+    },
   }
-  return grouped
-}
 
-export function useTicketsByStatus(projectId: string): Record<Status, Ticket[]> {
-  const tickets = useBoardStore((state) => state.tickets)
-  return useMemo(
-    () => groupByStatus(tickets.filter((t) => t.projectId === projectId)),
-    [tickets, projectId],
-  )
+  return selector(state)
 }

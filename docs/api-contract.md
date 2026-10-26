@@ -123,6 +123,7 @@ REST anidado por relación: un recurso que no tiene sentido sin su padre vive ba
 
 | Método + Ruta | Payload request | Response (`data`) | Dispara desde | Reglas de negocio |
 |---|---|---|---|---|
+| `GET /users` | — | `User[]` (sin `password_hash`) | *(nuevo — `ProjectsPage.tsx`/`ProjectGrid.tsx`, resolver nombre del creador de un proyecto)* | sin paginación ni filtro en esta fase; lista completa |
 | `GET /tickets` | query: `projectId?, priority?, assigneeId?, tag?, dueDateFrom?, dueDateTo?, page, pageSize` | `Paginated<Ticket>` | *(nuevo — filtros combinados, H8)* | combina todos los filtros presentes con AND; sin resultados → `items: []` (H8 edge case) |
 | `POST /tickets` | `{ title, description?, projectId, priority, assigneeIds?, tags?, dueDate? }` | `Ticket` creado | *(nuevo — formulario de creación, H6)* | `projectId` obligatorio (400 si falta — H5 edge case); `priority` debe ser uno de los 3 valores (400 si no — H6 edge case) |
 | `PATCH /tickets/:id` | subconjunto de campos editables de `Ticket` | `Ticket` actualizado | *(nuevo — formulario de edición, H2/H3)* | permitido si `actor.role === 'admin'` O `actor.id === ticket.creatorId` O `actor.id` ∈ `ticket.assigneeIds` (H2, H3); si no, 403. Última escritura gana, sin detección de conflicto (H10) |

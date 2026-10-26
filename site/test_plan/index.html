@@ -1,0 +1,1056 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica autogenerada de Mini Jira (API, diagramas, cobertura de tests, base de datos)">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Plan de Pruebas — Mini Jira (MVP) - Mini Jira — Documentación Técnica</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#plan-de-pruebas-mini-jira-mvp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-header__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mini Jira — Documentación Técnica
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Plan de Pruebas — Mini Jira (MVP)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../diagramas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Diagramas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cobertura-tests/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cobertura de Tests
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../base-de-datos/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Base de Datos
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-nav__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mini Jira — Documentación Técnica
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagramas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagramas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cobertura-tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cobertura de Tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../base-de-datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base de Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="plan-de-pruebas-mini-jira-mvp">Plan de Pruebas — Mini Jira (MVP)<a class="headerlink" href="#plan-de-pruebas-mini-jira-mvp" title="Permanent link">&para;</a></h1>
+<p><strong>Rol:</strong> QA Lead Senior
+<strong>Fuentes:</strong> docs/backlog.md, docs/specs.md
+<strong>Alcance:</strong> Un caso de prueba por cada escenario Gherkin del backlog (positivo, negativo o borde), matriz de edge cases críticos no cubiertos y validación de cobertura de RF.</p>
+<hr />
+<h2 id="1-casos-de-prueba-por-criterio-de-aceptacion">1. Casos de prueba por criterio de aceptación<a class="headerlink" href="#1-casos-de-prueba-por-criterio-de-aceptacion" title="Permanent link">&para;</a></h2>
+<h3 id="historia-1-registro-y-autenticacion-rf-01">Historia 1 — Registro y autenticación (RF-01)<a class="headerlink" href="#historia-1-registro-y-autenticacion-rf-01" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario (Gherkin)</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H1-01</td>
+<td>Registro exitoso con email obligatorio</td>
+<td>Positivo</td>
+<td>Completar registro con usuario, contraseña y email válidos y enviar</td>
+<td>Cuenta creada, email queda asociado</td>
+</tr>
+<tr>
+<td>TC-H1-02</td>
+<td>Login exitoso</td>
+<td>Positivo</td>
+<td>Iniciar sesión con usuario/contraseña correctos de una cuenta existente</td>
+<td>Acceso concedido con el rol correspondiente</td>
+</tr>
+<tr>
+<td>TC-H1-03</td>
+<td>Registro sin email</td>
+<td>Negativo</td>
+<td>Enviar el formulario de registro sin completar el email</td>
+<td>Registro rechazado, error de campo obligatorio</td>
+</tr>
+<tr>
+<td>TC-H1-04</td>
+<td>Login con credenciales incorrectas</td>
+<td>Negativo</td>
+<td>Iniciar sesión con contraseña incorrecta para una cuenta existente</td>
+<td>Acceso denegado</td>
+</tr>
+<tr>
+<td>TC-H1-05</td>
+<td>Registro con usuario duplicado</td>
+<td>Negativo</td>
+<td>Registrar una cuenta con un nombre de usuario ya existente</td>
+<td>Registro rechazado por duplicidad</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-2-permisos-ampliados-del-admin-rf-02-rf-03">Historia 2 — Permisos ampliados del Admin (RF-02, RF-03)<a class="headerlink" href="#historia-2-permisos-ampliados-del-admin-rf-02-rf-03" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H2-01</td>
+<td>Admin edita ticket de otro usuario</td>
+<td>Positivo</td>
+<td>Con sesión Admin, editar un ticket creado por un Usuario normal</td>
+<td>Cambios guardados correctamente</td>
+</tr>
+<tr>
+<td>TC-H2-02</td>
+<td>Admin archiva ticket de cualquier usuario</td>
+<td>Positivo</td>
+<td>Con sesión Admin, archivar un ticket creado por otro usuario</td>
+<td>Ticket archivado (soft-delete); registro de trazabilidad muestra al Admin como autor de la acción</td>
+</tr>
+<tr>
+<td>TC-H2-03</td>
+<td>Usuario normal intenta editar ticket ajeno</td>
+<td>Negativo</td>
+<td>Con sesión Usuario normal, intentar editar un ticket que no creó ni tiene asignado</td>
+<td>Acción rechazada</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-3-gestion-de-tickets-propiosasignados-rf-04">Historia 3 — Gestión de tickets propios/asignados (RF-04)<a class="headerlink" href="#historia-3-gestion-de-tickets-propiosasignados-rf-04" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H3-01</td>
+<td>Usuario normal edita ticket que creó</td>
+<td>Positivo</td>
+<td>Crear un ticket como Usuario normal y editarlo</td>
+<td>Cambios guardados</td>
+</tr>
+<tr>
+<td>TC-H3-02</td>
+<td>Usuario normal edita ticket en el que fue asignado</td>
+<td>Positivo</td>
+<td>Asignar un ticket creado por otro usuario a este Usuario normal y editarlo</td>
+<td>Cambios guardados</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-4-archivado-con-trazabilidad-rf-05-rf-06">Historia 4 — Archivado con trazabilidad (RF-05, RF-06)<a class="headerlink" href="#historia-4-archivado-con-trazabilidad-rf-05-rf-06" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H4-01</td>
+<td>Usuario normal archiva ticket propio</td>
+<td>Positivo</td>
+<td>Archivar ("Eliminar") un ticket propio y verificar en base de datos</td>
+<td>Ticket marcado como archivado; el registro sigue existiendo físicamente</td>
+</tr>
+<tr>
+<td>TC-H4-02</td>
+<td>Usuario normal intenta archivar ticket ajeno</td>
+<td>Negativo</td>
+<td>Intentar archivar un ticket que no creó ni tiene asignado</td>
+<td>Acción rechazada</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-5-proyectos-y-visibilidad-por-rol-rf-07-rf-08-rf-09-rf-09-bis">Historia 5 — Proyectos y visibilidad por rol (RF-07, RF-08, RF-09, RF-09-bis)<a class="headerlink" href="#historia-5-proyectos-y-visibilidad-por-rol-rf-07-rf-08-rf-09-rf-09-bis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H5-01</td>
+<td>Usuario normal crea un proyecto</td>
+<td>Positivo</td>
+<td>Crear un proyecto con sesión Usuario normal</td>
+<td>Proyecto registrado con este usuario como creador</td>
+</tr>
+<tr>
+<td>TC-H5-02</td>
+<td>Admin ve todos los proyectos</td>
+<td>Positivo</td>
+<td>Con sesión Admin, abrir el listado de proyectos</td>
+<td>Se listan todos los proyectos existentes</td>
+</tr>
+<tr>
+<td>TC-H5-03</td>
+<td>Usuario normal ve solo sus proyectos</td>
+<td>Positivo</td>
+<td>Con sesión Usuario normal (no creador/miembro de todos), abrir el listado</td>
+<td>Solo aparecen proyectos creados o asignados a este usuario</td>
+</tr>
+<tr>
+<td>TC-H5-04</td>
+<td>Creador del proyecto asigna miembros</td>
+<td>Positivo</td>
+<td>Como creador de un proyecto, agregar a un Usuario normal como miembro</td>
+<td>El usuario agregado ve el proyecto en su listado</td>
+</tr>
+<tr>
+<td>TC-H5-05</td>
+<td>Admin asigna miembros a proyecto ajeno</td>
+<td>Positivo</td>
+<td>Con sesión Admin, agregar un miembro a un proyecto que no creó</td>
+<td>Asignación exitosa</td>
+</tr>
+<tr>
+<td>TC-H5-06</td>
+<td>Usuario normal intenta asignar miembro a proyecto ajeno</td>
+<td>Negativo</td>
+<td>Con sesión Usuario normal (no creador), intentar agregar un miembro a un proyecto de otro</td>
+<td>Acción rechazada</td>
+</tr>
+<tr>
+<td>TC-H5-07</td>
+<td>Creación de ticket sin proyecto asociado</td>
+<td>Negativo</td>
+<td>Intentar guardar un ticket sin seleccionar proyecto</td>
+<td>Creación rechazada por campo obligatorio</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-6-ticket-con-campos-completos-rf-07-rf-11">Historia 6 — Ticket con campos completos (RF-07, RF-11)<a class="headerlink" href="#historia-6-ticket-con-campos-completos-rf-07-rf-11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H6-01</td>
+<td>Creación de ticket con todos los campos</td>
+<td>Positivo</td>
+<td>Crear ticket completando título, descripción, prioridad, fecha, responsable(s), proyecto y etiquetas</td>
+<td>Ticket creado, asociado a un único proyecto, con todos los campos persistidos</td>
+</tr>
+<tr>
+<td>TC-H6-02</td>
+<td>Ticket con múltiples etiquetas libres</td>
+<td>Positivo</td>
+<td>Añadir 3+ etiquetas de texto libre a un ticket</td>
+<td>Todas las etiquetas quedan asociadas</td>
+</tr>
+<tr>
+<td>TC-H6-03</td>
+<td>Prioridad fuera de valores permitidos</td>
+<td>Negativo</td>
+<td>Intentar guardar un ticket con prioridad distinta de Alta/Media/Baja</td>
+<td>Valor rechazado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-7-asignacion-multiple-rf-10">Historia 7 — Asignación múltiple (RF-10)<a class="headerlink" href="#historia-7-asignacion-multiple-rf-10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H7-01</td>
+<td>Asignar múltiples responsables</td>
+<td>Positivo</td>
+<td>Asignar 2+ personas a un mismo ticket</td>
+<td>Todas quedan registradas como responsables</td>
+</tr>
+<tr>
+<td>TC-H7-02</td>
+<td>Autoasignación de ticket</td>
+<td>Positivo</td>
+<td>Un usuario se asigna a sí mismo un ticket no asignado previamente</td>
+<td>Queda registrado como responsable</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-8-filtros-rf-12">Historia 8 — Filtros (RF-12)<a class="headerlink" href="#historia-8-filtros-rf-12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H8-01</td>
+<td>Filtrar por proyecto</td>
+<td>Positivo</td>
+<td>Con tickets de varios proyectos, filtrar por uno específico</td>
+<td>Solo se muestran tickets de ese proyecto</td>
+</tr>
+<tr>
+<td>TC-H8-02</td>
+<td>Filtrar combinando criterios</td>
+<td>Positivo</td>
+<td>Filtrar simultáneamente por prioridad y responsable</td>
+<td>Solo se muestran tickets que cumplen ambos criterios</td>
+</tr>
+<tr>
+<td>TC-H8-03</td>
+<td>Filtro sin resultados</td>
+<td>Borde</td>
+<td>Aplicar combinación de filtros que ningún ticket cumple</td>
+<td>Listado vacío, sin error</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-9-tablero-kanban-secuencial-rf-13">Historia 9 — Tablero Kanban secuencial (RF-13)<a class="headerlink" href="#historia-9-tablero-kanban-secuencial-rf-13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H9-01</td>
+<td>Avanzar al siguiente estado</td>
+<td>Positivo</td>
+<td>Cambiar un ticket de "Por hacer" a "En progreso"</td>
+<td>Estado actualizado</td>
+</tr>
+<tr>
+<td>TC-H9-02</td>
+<td>Completar flujo hasta Terminado</td>
+<td>Positivo</td>
+<td>Cambiar un ticket de "Review" a "Terminado"</td>
+<td>Estado actualizado</td>
+</tr>
+<tr>
+<td>TC-H9-03</td>
+<td>Salto de columnas hacia adelante</td>
+<td>Negativo</td>
+<td>Intentar cambiar un ticket de "Por hacer" a "Terminado" directamente</td>
+<td>Transición rechazada</td>
+</tr>
+<tr>
+<td>TC-H9-04</td>
+<td>Retroceso de estado</td>
+<td>Negativo</td>
+<td>Intentar cambiar un ticket de "Review" a "Por hacer"</td>
+<td>Transición rechazada</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-10-conflictos-de-edicion-concurrente-rf-14">Historia 10 — Conflictos de edición concurrente (RF-14)<a class="headerlink" href="#historia-10-conflictos-de-edicion-concurrente-rf-14" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H10-01</td>
+<td>Last-write-wins</td>
+<td>Borde</td>
+<td>Dos sesiones abren el mismo ticket, editan campos distintos y guardan en secuencia (A luego B)</td>
+<td>Prevalece la versión de B, sin bloqueo ni mensaje de conflicto</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-11-comentarios-rf-15">Historia 11 — Comentarios (RF-15)<a class="headerlink" href="#historia-11-comentarios-rf-15" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H11-01</td>
+<td>Añadir comentario</td>
+<td>Positivo</td>
+<td>Escribir y enviar un comentario en un ticket</td>
+<td>Comentario visible en el hilo</td>
+</tr>
+<tr>
+<td>TC-H11-02</td>
+<td>Ver hilo cronológico</td>
+<td>Positivo</td>
+<td>Abrir un ticket con varios comentarios previos</td>
+<td>Comentarios listados en orden cronológico</td>
+</tr>
+</tbody>
+</table>
+<h3 id="historia-12-modo-oscuro-rf-16">Historia 12 — Modo oscuro (RF-16)<a class="headerlink" href="#historia-12-modo-oscuro-rf-16" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Escenario</th>
+<th>Tipo</th>
+<th>Pasos</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-H12-01</td>
+<td>Activar modo oscuro</td>
+<td>Positivo</td>
+<td>Desde modo claro, activar el modo oscuro</td>
+<td>Interfaz cambia a paleta oscura</td>
+</tr>
+<tr>
+<td>TC-H12-02</td>
+<td>Activar modo claro</td>
+<td>Positivo</td>
+<td>Desde modo oscuro, activar el modo claro</td>
+<td>Interfaz cambia a paleta clara</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total: 36 casos de prueba</strong> cubriendo los 36 escenarios Gherkin del backlog.</p>
+<hr />
+<h2 id="2-edge-cases-criticos-no-cubiertos-en-el-backlog">2. Edge cases críticos no cubiertos en el backlog<a class="headerlink" href="#2-edge-cases-criticos-no-cubiertos-en-el-backlog" title="Permanent link">&para;</a></h2>
+<p>Identificados por inferencia directa sobre las reglas de negocio de specs.md que el backlog no ejercita explícitamente.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Edge case</th>
+<th>Impacto</th>
+<th>Probabilidad</th>
+<th>Prioridad</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EC-01</td>
+<td>Crear ticket con campos obligatorios vacíos distintos de proyecto (título, fecha o responsable vacíos)</td>
+<td>Alto — RF-11 exige estos campos; datos incompletos rompen filtros (RF-12) y el tablero</td>
+<td>Alta — es el error de entrada más común en formularios de uso diario</td>
+<td><strong>Crítica</strong></td>
+<td>Combina alta frecuencia de ocurrencia con alto daño funcional aguas abajo (filtros, tablero)</td>
+</tr>
+<tr>
+<td>EC-02</td>
+<td>Dos usuarios cambian el estado del mismo ticket simultáneamente a valores distintos (choque entre RF-13 y RF-14)</td>
+<td>Alto — puede violar la transición secuencial obligatoria si "last-write-wins" (RF-14) sobrescribe una transición válida con una inválida</td>
+<td>Media — requiere dos usuarios trabajando el mismo ticket a la vez, plausible en equipo de 10 personas compartiendo pocos tickets activos</td>
+<td><strong>Alta</strong></td>
+<td>RF-13 y RF-14 no definen cuál prevalece; es una zona gris del PRD con alto riesgo de comportamiento inconsistente</td>
+</tr>
+<tr>
+<td>EC-03</td>
+<td>Tickets archivados (soft-delete) siguen apareciendo en el tablero o en los filtros por defecto</td>
+<td>Alto — expone datos que el usuario espera "eliminados" (RF-06), rompe confianza en la función Archivar</td>
+<td>Media — depende de si la query de listado excluye archivados por defecto, un descuido común de implementación</td>
+<td><strong>Alta</strong></td>
+<td>Riesgo directo de violar la expectativa de RF-05/RF-06 sin que el PRD lo aclare explícitamente</td>
+</tr>
+<tr>
+<td>EC-04</td>
+<td>Se intenta cambiar de estado o editar un ticket ya archivado</td>
+<td>Medio — puede "revivir" trabajo que debía quedar cerrado</td>
+<td>Media</td>
+<td><strong>Media</strong></td>
+<td>No está prohibido explícitamente en el PRD; buena práctica validar que un ticket archivado quede de solo lectura</td>
+</tr>
+<tr>
+<td>EC-05</td>
+<td>Un usuario es removido como miembro de un proyecto pero conserva tickets asignados en él</td>
+<td>Alto — puede perder acceso a su propio trabajo (RF-09) o, al revés, retener visibilidad indebida</td>
+<td>Baja — la gestión de membresías es una acción administrativa poco frecuente</td>
+<td><strong>Media</strong></td>
+<td>El PRD no define qué ocurre con la visibilidad de tickets tras remover membresía (RF-09/RF-09-bis); gap de especificación con impacto alto si ocurre</td>
+</tr>
+<tr>
+<td>EC-06</td>
+<td>Login con nombre de usuario que no existe (no solo contraseña incorrecta)</td>
+<td>Bajo — comportamiento estándar de rechazo, sin riesgo funcional grave</td>
+<td>Alta — error de tipeo frecuente</td>
+<td><strong>Media</strong></td>
+<td>Alta frecuencia pero bajo daño; se prioriza por debajo de casos con impacto alto</td>
+</tr>
+<tr>
+<td>EC-07</td>
+<td>Alta del primer usuario Admin del sistema (bootstrap)</td>
+<td>Alto — sin un Admin, nadie puede asignar el rol ni gestionar el sistema</td>
+<td>Baja — ocurre una única vez, en el despliegue inicial</td>
+<td><strong>Media</strong></td>
+<td>No es solo un caso de prueba: es un vacío de especificación en specs.md (RF-02 no define cómo se otorga el primer rol Admin); debe resolverse con Producto antes de certificar</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-validacion-final-rf-de-specsmd-sin-test-asociado">3. Validación final — RF de specs.md sin test asociado<a class="headerlink" href="#3-validacion-final-rf-de-specsmd-sin-test-asociado" title="Permanent link">&para;</a></h2>
+<p>Revisando RF-01 a RF-19 y RNF-01/RNF-02 contra la sección 1:</p>
+<ul>
+<li><strong>RF-17</strong> — "Estética visual moderna, limpia, con sombras suaves (estilo Apple)": <strong>sin test funcional asociado</strong>. Es un requerimiento subjetivo/visual; no es expresable como Given/When/Then verificable por QA funcional. Requiere una revisión de diseño/UX (checklist visual o QA manual comparando contra mockups), no un caso de prueba Gherkin.</li>
+<li><strong>RNF-01</strong> — "Tiempo de carga percibido como rápido": <strong>sin test asociado</strong>, y no puede tenerlo todavía. El propio PRD lo marca <code>[PENDIENTE]</code> sin SLA numérico definido; no se puede certificar un umbral que no existe. Queda bloqueado hasta que Producto/Tech Lead cierre este punto pendiente (sección 7 de specs.md).</li>
+<li><strong>RNF-02</strong> — "Plazo de entrega de 3 semanas": <strong>sin test asociado</strong>. Es un requerimiento de gestión de proyecto (fecha de entrega), no una funcionalidad verificable mediante casos de prueba.</li>
+</ul>
+<p><strong>RF-18 y RF-19</strong> (notificaciones por email, dashboard de métricas) quedan correctamente <strong>fuera de este plan de pruebas</strong>: el propio PRD los declara fuera de alcance del MVP (Fase 2), y el backlog los excluye de forma explícita. No se consideran una brecha de cobertura sino un alcance correctamente delimitado.</p>
+<p><strong>Todos los RF funcionales del MVP (RF-01 a RF-16, incluyendo RF-09-bis) tienen al menos un caso de prueba asociado en la sección 1.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

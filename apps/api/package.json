@@ -4,11 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "openapi:gen": "tsx scripts/generate-openapi.ts"
+    "openapi:gen": "tsx scripts/generate-openapi.ts",
+    "test": "vitest run"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
@@ -26,8 +27,11 @@
     "@types/node": "^22.9.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^6.1.1",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^5.0.4",
     "yaml": "^2.6.0"
   }
 }

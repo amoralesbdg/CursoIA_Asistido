@@ -1,0 +1,31 @@
+# Secretos y entornos locales
+.env
+.env.*
+!.env.template
+
+# Dependencias y artefactos de build (se reinstalan/regeneran dentro de la imagen)
+node_modules
+**/node_modules
+.next
+**/.next
+dist
+**/dist
+*.tsbuildinfo
+
+# Control de versiones
+.git
+.gitignore
+
+# Tests y cobertura
+coverage
+**/coverage
+**/*.test.ts
+**/*.test.tsx
+**/src/test
+
+# Misceláneos del entorno local
+.DS_Store
+**/.DS_Store
+*.log
+npm-debug.log*
+pnpm-debug.log*

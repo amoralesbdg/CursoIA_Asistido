@@ -1,0 +1,730 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica autogenerada de Mini Jira (API, diagramas, cobertura de tests, base de datos)">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>PRD — Mini Jira (MVP) - Mini Jira — Documentación Técnica</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prd-mini-jira-mvp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-header__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mini Jira — Documentación Técnica
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PRD — Mini Jira (MVP)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../diagramas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Diagramas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cobertura-tests/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cobertura de Tests
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../base-de-datos/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Base de Datos
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-nav__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mini Jira — Documentación Técnica
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagramas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagramas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cobertura-tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cobertura de Tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../base-de-datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base de Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="prd-mini-jira-mvp">PRD — Mini Jira (MVP)<a class="headerlink" href="#prd-mini-jira-mvp" title="Permanent link">&para;</a></h1>
+<p><strong>Fuente:</strong> Transcripción de reunión de kick-off (24 de octubre) + respuestas de aclaración del Product Manager/Tech Lead recogidas en sesión de seguimiento.
+<strong>Estado:</strong> Borrador para desarrollo. Contiene puntos <code>[PENDIENTE]</code> que deben cerrarse antes de construir esa parte del sistema.</p>
+<hr />
+<h2 id="1-objetivos">1. Objetivos<a class="headerlink" href="#1-objetivos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Proveer a la empresa (10 personas) una herramienta interna ligera de gestión de tickets, agrupados por proyecto, que sustituya la necesidad de un Jira "pesado" (transcripción, línea 6, 9).</li>
+<li>Ofrecer una experiencia visual moderna, limpia y minimalista ("estilo Apple": blanco, sombras suaves), fácil de usar sin manual (transcripción, líneas 9, 55).</li>
+<li>Entregar una primera versión funcional en un plazo de 3 semanas, con holgura confirmada para ese mismo rango (transcripción, línea 6; respuesta P13).</li>
+</ul>
+<h2 id="2-in-scope-out-of-scope">2. In-Scope / Out-of-Scope<a class="headerlink" href="#2-in-scope-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="in-scope-mvp">In-Scope (MVP)<a class="headerlink" href="#in-scope-mvp" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Autenticación propia (usuario/contraseña) con email obligatorio por cuenta (respuesta P1).</li>
+<li>Roles: Admin y Usuario normal, con permisos diferenciados (respuestas P2, P3).</li>
+<li>Gestión de proyectos: creación, edición, visibilidad restringida por rol (respuestas P5, P6).</li>
+<li>Gestión de tickets: creación, edición, cambio de estado, soft-delete/archivado (transcripción línea 18; respuestas P2, P3).</li>
+<li>Asociación ticket → proyecto (relación uno a uno) (respuesta P4).</li>
+<li>Asignación de múltiples personas a un ticket (respuesta P7).</li>
+<li>Campos de ticket: título, descripción, prioridad, fecha, responsable, proyecto, etiquetas (respuesta P10).</li>
+<li>Filtros de tickets por los mismos campos (transcripción línea 27; respuesta P10).</li>
+<li>Tablero con 4 estados: Por hacer, En progreso, Review, Terminado (respuesta P8).</li>
+<li>Resolución de conflictos de edición concurrente por "last-write-wins" (respuesta P9).</li>
+<li>Comentarios dentro del ticket (transcripción línea 40).</li>
+<li>Modo oscuro (respuesta P14).</li>
+<li>Estética visual moderna tipo Apple (transcripción líneas 9, 55).</li>
+</ul>
+<h3 id="out-of-scope-fase-2-posterior-al-mvp">Out-of-Scope (Fase 2 / posterior al MVP)<a class="headerlink" href="#out-of-scope-fase-2-posterior-al-mvp" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Notificaciones por email (menciones, asignaciones) (respuesta P11).</li>
+<li>Dashboard de métricas (tickets cerrados por mes/proyecto) (transcripción línea 44; respuesta P11-bis).</li>
+</ul>
+<h2 id="3-stack-tecnologico">3. Stack Tecnológico<a class="headerlink" href="#3-stack-tecnologico" title="Permanent link">&para;</a></h2>
+<p>(Fuente: respuesta P12)</p>
+<ul>
+<li><strong>Frontend:</strong> React</li>
+<li><strong>Backend:</strong> Node.js</li>
+<li><strong>Base de datos:</strong> SQLite (relacional)</li>
+</ul>
+<h2 id="4-supuestos">4. Supuestos<a class="headerlink" href="#4-supuestos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>La empresa tiene ~10 empleados, por lo que no se asumen requisitos de escalabilidad horizontal ni alta concurrencia masiva (transcripción, línea 6).</li>
+<li>El plazo de 3 semanas es una fecha con holgura, no estrictamente rígida (respuesta P13), pero se toma como objetivo de planificación del MVP.</li>
+<li>"Eliminar" en la interfaz de usuario será, técnicamente, un soft-delete/archivado; se mantiene la etiqueta "Eliminar" en el botón por claridad de uso, aunque el registro no se borra físicamente (transcripción, líneas 49–50; respuestas P2, P3).</li>
+<li>El campo de email del usuario se recolecta desde el MVP aunque las notificaciones por email queden diferidas a fase 2, para no requerir una migración de esquema posterior (respuesta P1, P11).</li>
+</ul>
+<h2 id="5-requerimientos-funcionales">5. Requerimientos Funcionales<a class="headerlink" href="#5-requerimientos-funcionales" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requerimiento</th>
+<th>Fuente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RF-01</td>
+<td>El sistema debe permitir registro/login con usuario y contraseña propios; toda cuenta requiere un email asociado.</td>
+<td>(respuesta P1)</td>
+</tr>
+<tr>
+<td>RF-02</td>
+<td>Deben existir dos roles: Admin y Usuario normal.</td>
+<td>(transcripción línea 15; respuesta P2)</td>
+</tr>
+<tr>
+<td>RF-03</td>
+<td>Un Admin puede editar y borrar (soft-delete) tickets de cualquier usuario.</td>
+<td>(respuesta P2, P3)</td>
+</tr>
+<tr>
+<td>RF-04</td>
+<td>Un Usuario normal puede crear/editar proyectos, crear/editar tickets que creó o en los que fue asignado, y cambiar su estado.</td>
+<td>(respuesta P2, P-propios)</td>
+</tr>
+<tr>
+<td>RF-05</td>
+<td>Un Usuario normal solo puede eliminar (archivar) tickets que creó o en los que fue asignado; un Admin puede archivar tickets de cualquier usuario, dejando trazabilidad del cambio.</td>
+<td>(respuesta P3, P-propios)</td>
+</tr>
+<tr>
+<td>RF-06</td>
+<td>El borrado de tickets es lógico (soft-delete/archivado), nunca físico.</td>
+<td>(transcripción línea 49; respuestas P2, P3)</td>
+</tr>
+<tr>
+<td>RF-07</td>
+<td>Un ticket pertenece exactamente a un proyecto (relación 1:N proyecto→ticket).</td>
+<td>(respuesta P4)</td>
+</tr>
+<tr>
+<td>RF-08</td>
+<td>Tanto un Admin como un Usuario normal pueden crear proyectos.</td>
+<td>(respuesta P5)</td>
+</tr>
+<tr>
+<td>RF-09</td>
+<td>Un Admin puede ver todos los proyectos. Un Usuario normal solo ve los proyectos que creó o a los que fue asignado.</td>
+<td>(respuesta P6)</td>
+</tr>
+<tr>
+<td>RF-09-bis</td>
+<td>La membresía de un usuario normal a un proyecto (asignación) la realiza quien creó el proyecto; un Admin también puede asignar usuarios a cualquier proyecto.</td>
+<td>(respuesta P-mem)</td>
+</tr>
+<tr>
+<td>RF-10</td>
+<td>Un ticket puede tener múltiples personas asignadas simultáneamente. Cualquier usuario (Admin o normal) puede asignar el ticket a otros usuarios o a sí mismo.</td>
+<td>(respuesta P7, P7-bis)</td>
+</tr>
+<tr>
+<td>RF-11</td>
+<td>El ticket debe contener los campos: título, descripción, prioridad (valores: Alta, Media, Baja), fecha, responsable(s), proyecto y etiquetas (texto libre, sin lista predefinida).</td>
+<td>(respuesta P10, P-prioridad, P-etiquetas)</td>
+</tr>
+<tr>
+<td>RF-12</td>
+<td>El listado de tickets debe poder filtrarse por: fecha, prioridad, responsable, proyecto y etiquetas.</td>
+<td>(transcripción línea 27; respuesta P10)</td>
+</tr>
+<tr>
+<td>RF-13</td>
+<td>El tablero de tickets debe tener 4 estados/columnas: "Por hacer", "En progreso", "Review", "Terminado". La transición entre estados es secuencial y obligatoria, en ese mismo orden (no se permite saltar columnas).</td>
+<td>(respuesta P8, P-flujo)</td>
+</tr>
+<tr>
+<td>RF-14</td>
+<td>Si dos usuarios editan el mismo ticket y ambos guardan, prevalece la última escritura (last-write-wins), sin bloqueo optimista ni aviso de conflicto.</td>
+<td>(respuesta P9)</td>
+</tr>
+<tr>
+<td>RF-15</td>
+<td>Los tickets deben soportar comentarios internos (hilo de conversación dentro del ticket).</td>
+<td>(transcripción línea 40)</td>
+</tr>
+<tr>
+<td>RF-16</td>
+<td>La interfaz debe soportar modo claro y modo oscuro.</td>
+<td>(respuesta P14)</td>
+</tr>
+<tr>
+<td>RF-17</td>
+<td>La estética visual debe ser moderna, limpia, con sombras suaves ("estilo Apple"), evitando la apariencia "gris" de un Jira tradicional.</td>
+<td>(transcripción líneas 9, 55)</td>
+</tr>
+<tr>
+<td>RF-18</td>
+<td>Las notificaciones por email (por mención o asignación) quedan fuera del MVP y se implementan en una fase posterior.</td>
+<td>(respuesta P11)</td>
+</tr>
+<tr>
+<td>RF-19</td>
+<td>El Dashboard de métricas (tickets cerrados por mes/proyecto) queda fuera del MVP y se implementa en una fase posterior.</td>
+<td>(transcripción línea 44; respuesta P11-bis)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-requerimientos-no-funcionales">6. Requerimientos No Funcionales<a class="headerlink" href="#6-requerimientos-no-funcionales" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requerimiento</th>
+<th>Fuente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RNF-01</td>
+<td>El sistema debe tener un tiempo de carga percibido como "rápido" por el usuario.</td>
+<td>(transcripción línea 35) — <code>[PENDIENTE]</code> definir SLA/umbral numérico concreto (ej. tiempo máximo de respuesta en ms). Se deja pendiente deliberadamente, sin fecha de resolución asignada (respuesta P-sla).</td>
+</tr>
+<tr>
+<td>RNF-02</td>
+<td>Plazo objetivo de entrega a producción: 3 semanas desde el inicio de desarrollo.</td>
+<td>(transcripción línea 6; respuesta P13)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-puntos-pendientes-a-resolver-antes-de-implementar-esa-parte">7. Puntos Pendientes (a resolver antes de implementar esa parte)<a class="headerlink" href="#7-puntos-pendientes-a-resolver-antes-de-implementar-esa-parte" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong><code>[PENDIENTE]</code></strong> Definir SLA/umbral numérico de rendimiento (ver RNF-01). Dejado pendiente de forma deliberada; no se implementará ninguna métrica de rendimiento específica hasta que se defina.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

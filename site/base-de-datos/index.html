@@ -1,0 +1,1336 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica autogenerada de Mini Jira (API, diagramas, cobertura de tests, base de datos)">
+      
+      
+      
+      
+        <link rel="prev" href="../cobertura-tests/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Base de Datos - Mini Jira — Documentación Técnica</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#base-de-datos-mini-jira-mvp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-header__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mini Jira — Documentación Técnica
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Base de Datos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../diagramas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Diagramas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cobertura-tests/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cobertura de Tests
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Base de Datos
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-nav__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mini Jira — Documentación Técnica
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagramas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagramas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cobertura-tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cobertura de Tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base de Datos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base de Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-erd-mermaid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ERD (Mermaid)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-columnas-por-tabla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Columnas por tabla
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Columnas por tabla">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        users
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        projects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project_members" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        project_members
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tickets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tickets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ticket_assignees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ticket_assignees
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ticket_tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ticket_tags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        comments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audit_log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        audit_log
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ticket_locks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ticket_locks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-decisiones-de-diseno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Decisiones de diseño
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-fuera-de-alcance-out_of_scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Fuera de alcance (out_of_scope)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="base-de-datos-mini-jira-mvp">Base de datos — Mini Jira (MVP)<a class="headerlink" href="#base-de-datos-mini-jira-mvp" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Fuente única: <code>database-schema.yaml</code> (raíz del repo). Motor: <strong>PostgreSQL (Supabase)</strong>.
+Este documento es una transcripción fiel de ese archivo. Ninguna tabla, columna o relación aquí presente fue inventada; donde el YAML no especifica algo, se marca como <code>PENDIENTE: no especificado en database-schema.yaml</code>.</p>
+</blockquote>
+<h2 id="1-erd-mermaid">1. ERD (Mermaid)<a class="headerlink" href="#1-erd-mermaid" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>erDiagram
+    USERS ||--o{ PROJECTS : "creator_id (crea)"
+    USERS ||--o{ PROJECT_MEMBERS : "user_id (es miembro)"
+    PROJECTS ||--o{ PROJECT_MEMBERS : "project_id (tiene miembros)"
+    USERS ||--o{ TICKETS : "creator_id (crea)"
+    PROJECTS ||--o{ TICKETS : "project_id (agrupa, 1:N)"
+    USERS ||--o{ TICKET_ASSIGNEES : "user_id (asignado a)"
+    TICKETS ||--o{ TICKET_ASSIGNEES : "ticket_id (tiene asignados)"
+    TICKETS ||--o{ TICKET_TAGS : "ticket_id (etiquetado con)"
+    TAGS ||--o{ TICKET_TAGS : "tag_id (aplicada a)"
+    TICKETS ||--o{ COMMENTS : "ticket_id (tiene comentarios, 1:N)"
+    USERS ||--o{ COMMENTS : "author_id (autor de)"
+    TICKETS ||--o{ AUDIT_LOG : "ticket_id (tiene historial, 1:N)"
+    USERS ||--o{ AUDIT_LOG : "actor_id (realiza)"
+    TICKETS ||--|| TICKET_LOCKS : "ticket_id (lock informativo, 1:1)"
+    USERS ||--o{ TICKET_LOCKS : "user_id (posee lock)"
+
+    USERS {
+        uuid id PK
+        text name
+        text username UK
+        text email UK
+        text password_hash
+        enum_role role
+        timestamptz created_at
+    }
+
+    PROJECTS {
+        uuid id PK
+        text name
+        text description
+        uuid creator_id FK
+        timestamptz created_at
+    }
+
+    PROJECT_MEMBERS {
+        uuid project_id PK_FK
+        uuid user_id PK_FK
+        timestamptz added_at
+    }
+
+    TICKETS {
+        uuid id PK
+        text key UK
+        uuid project_id FK
+        text title
+        text description
+        enum_status status
+        enum_priority priority
+        uuid creator_id FK
+        date due_date
+        timestamptz archived_at
+        timestamptz created_at
+        timestamptz updated_at
+    }
+
+    TICKET_ASSIGNEES {
+        uuid ticket_id PK_FK
+        uuid user_id PK_FK
+        timestamptz assigned_at
+    }
+
+    TAGS {
+        uuid id PK
+        text name UK
+    }
+
+    TICKET_TAGS {
+        uuid ticket_id PK_FK
+        uuid tag_id PK_FK
+    }
+
+    COMMENTS {
+        uuid id PK
+        uuid ticket_id FK
+        uuid author_id FK
+        text body
+        timestamptz created_at
+    }
+
+    AUDIT_LOG {
+        uuid id PK
+        uuid ticket_id FK
+        uuid actor_id FK
+        enum_audit_action action
+        jsonb changes
+        timestamptz created_at
+    }
+
+    TICKET_LOCKS {
+        uuid ticket_id PK_FK
+        uuid user_id FK
+        timestamptz created_at
+    }</code></pre>
+<p><strong>Notas sobre las relaciones (según <code>database-schema.yaml</code>):</strong></p>
+<ul>
+<li><code>project_members</code>: relación <strong>N:M</strong> usuario↔proyecto (declarada como <code>relation: N:M</code> en el YAML). Clave primaria compuesta <code>[project_id, user_id]</code>.</li>
+<li><code>ticket_assignees</code>: relación <strong>N:M</strong> usuario↔ticket (declarada como <code>relation: N:M</code>). Clave primaria compuesta <code>[ticket_id, user_id]</code>.</li>
+<li><code>ticket_tags</code>: relación <strong>N:M</strong> ticket↔etiqueta (declarada como <code>relation: N:M</code>). Clave primaria compuesta <code>[ticket_id, tag_id]</code>.</li>
+<li><code>ticket_locks</code>: relación <strong>1:1</strong> con <code>tickets</code> (declarada como <code>relation: "1:1"</code>). La PK de <code>ticket_locks</code> es <code>ticket_id</code> (no un <code>id</code> propio), lo cual refuerza que a lo sumo existe un lock activo por ticket.</li>
+<li><code>projects</code> → <code>tickets</code>: relación <strong>1:N</strong> (un proyecto agrupa muchos tickets; cada ticket pertenece a exactamente un proyecto — RF-07).</li>
+<li><code>tickets</code> → <code>comments</code>: relación <strong>1:N</strong> (RF-15, H11).</li>
+<li><code>tickets</code> → <code>audit_log</code>: relación <strong>1:N</strong> (historial de cambios, H2/H4).</li>
+<li><code>users</code> → <code>projects</code> (vía <code>creator_id</code>), <code>users</code> → <code>tickets</code> (vía <code>creator_id</code>), <code>users</code> → <code>comments</code> (vía <code>author_id</code>), <code>users</code> → <code>audit_log</code> (vía <code>actor_id</code>): todas son relaciones <strong>1:N</strong> de tipo "autoría/creación".</li>
+</ul>
+<h2 id="2-columnas-por-tabla">2. Columnas por tabla<a class="headerlink" href="#2-columnas-por-tabla" title="Permanent link">&para;</a></h2>
+<h3 id="users">users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
+<p>Cuenta de usuario con autenticación propia (RF-01). Tabla propia e independiente, no delega en Supabase Auth.</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Tipo</th>
+<th>Constraints</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK, DEFAULT gen_random_uuid()</td>
+<td>—</td>
+</tr>
+<tr>
+<td>name</td>
+<td>text</td>
+<td>NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>username</td>
+<td>text</td>
+<td>NOT NULL, UNIQUE</td>
+<td>Login propio con usuario/contraseña (RF-01). Username único (H1 edge case).</td>
+</tr>
+<tr>
+<td>email</td>
+<td>text</td>
+<td>NOT NULL, UNIQUE</td>
+<td>Email obligatorio por cuenta (RF-01), aunque las notificaciones por email queden en fase 2.</td>
+</tr>
+<tr>
+<td>password_hash</td>
+<td>text</td>
+<td>NOT NULL</td>
+<td>Hash de contraseña (bcrypt/argon2), nunca texto plano.</td>
+</tr>
+<tr>
+<td>role</td>
+<td>enum(role)</td>
+<td>NOT NULL, DEFAULT 'user'</td>
+<td>—</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td>NOT NULL, DEFAULT now()</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Índices: <code>username</code> (unique), <code>email</code> (unique).</p>
+<h3 id="projects">projects<a class="headerlink" href="#projects" title="Permanent link">&para;</a></h3>
+<p>Proyecto que agrupa tickets (RF-08). ticket_count se calcula server-side, no se almacena.</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Tipo</th>
+<th>Constraints</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK, DEFAULT gen_random_uuid()</td>
+<td>—</td>
+</tr>
+<tr>
+<td>name</td>
+<td>text</td>
+<td>NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>description</td>
+<td>text</td>
+<td>(sin constraints)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>creator_id</td>
+<td>uuid</td>
+<td>FK→users.id, NOT NULL</td>
+<td>Actúa como owner del proyecto (H5). Define visibilidad para usuarios normales (RF-09).</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td>NOT NULL, DEFAULT now()</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Notas de tabla:
+- "ticket_count NO es columna: se calcula server-side como COUNT(tickets WHERE project_id=... AND archived_at IS NULL) (ver api-contract.md)."
+- "No se modela archived_at en projects: specs.md no describe borrado/archivado de proyectos."</p>
+<h3 id="project_members">project_members<a class="headerlink" href="#project_members" title="Permanent link">&para;</a></h3>
+<p>Relación N:M usuario↔proyecto (RF-09, RF-09-bis). Membresía asignada por el creador del proyecto o un Admin.</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Tipo</th>
+<th>Constraints</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>project_id</td>
+<td>uuid</td>
+<td>FK→projects.id, NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>uuid</td>
+<td>FK→users.id, NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>added_at</td>
+<td>timestamptz</td>
+<td>NOT NULL, DEFAULT now()</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Clave primaria: <code>[project_id, user_id]</code>.</p>
+<p>Notas de tabla:
+- "El creador del proyecto no se inserta automáticamente aquí: la visibilidad de RF-09 se resuelve con creator_id OR membresía en esta tabla."</p>
+<h3 id="tickets">tickets<a class="headerlink" href="#tickets" title="Permanent link">&para;</a></h3>
+<p>Ticket asociado a exactamente un proyecto (RF-07, relación 1:N proyecto→ticket).</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Tipo</th>
+<th>Constraints</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK, DEFAULT gen_random_uuid()</td>
+<td>—</td>
+</tr>
+<tr>
+<td>key</td>
+<td>text</td>
+<td>NOT NULL, UNIQUE</td>
+<td>Formato PREFIJO-N, generado server-side (ver api-contract.md).</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>uuid</td>
+<td>FK→projects.id, NOT NULL</td>
+<td>Obligatorio (RF-07, H5 edge case). POST /tickets rechaza si falta.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>text</td>
+<td>NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>description</td>
+<td>text</td>
+<td>(sin constraints)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>status</td>
+<td>enum(status)</td>
+<td>NOT NULL, DEFAULT 'todo'</td>
+<td>Transición secuencial obligatoria todo→in-progress→review→done (RF-13, H9). Se valida en la capa de aplicación, no como CHECK de columna.</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>enum(priority)</td>
+<td>NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>creator_id</td>
+<td>uuid</td>
+<td>FK→users.id, NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td>date</td>
+<td>(sin constraints)</td>
+<td>Campo 'fecha' de RF-11; filtro por fecha en RF-12.</td>
+</tr>
+<tr>
+<td>archived_at</td>
+<td>timestamptz</td>
+<td>(sin constraints)</td>
+<td>Soft-delete (RF-06). NULL = activo, no-NULL = archivado. Nunca se borra físicamente. Reemplaza el booleano <code>archived</code> del contrato API con un timestamp (permite saber cuándo se archivó).</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td>NOT NULL, DEFAULT now()</td>
+<td>—</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>timestamptz</td>
+<td>NOT NULL, DEFAULT now()</td>
+<td>No se usa para detección de conflictos: RF-14 es last-write-wins, sin bloqueo optimista ni aviso de conflicto.</td>
+</tr>
+</tbody>
+</table>
+<p>Índices: <code>status</code> (filtro de tablero y listado, RF-12/RF-13), <code>priority</code> (filtro por prioridad, RF-12), <code>project_id</code> (filtro por proyecto y join con projects, RF-07/RF-12), <code>archived_at</code> (excluir archivados por defecto en listados, ver api-contract.md GET /projects/:id/tickets).</p>
+<h3 id="ticket_assignees">ticket_assignees<a class="headerlink" href="#ticket_assignees" title="Permanent link">&para;</a></h3>
+<p>Relación N:M usuario↔ticket para asignación múltiple (RF-10).</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Tipo</th>
+<th>Constraints</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ticket_id</td>
+<td>uuid</td>
+<td>FK→tickets.id, NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>uuid</td>
+<td>FK→users.id, NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>assigned_at</td>
+<td>timestamptz</td>
+<td>NOT NULL, DEFAULT now()</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Clave primaria: <code>[ticket_id, user_id]</code>.</p>
+<p>Índices: <code>user_id</code> (filtro de tickets por responsable/assignee, RF-12, GET /tickets?assigneeId=).</p>
+<h3 id="tags">tags<a class="headerlink" href="#tags" title="Permanent link">&para;</a></h3>
+<p>Catálogo normalizado de etiquetas de texto libre (RF-11). Sin lista predefinida, pero deduplicadas entre tickets.</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Tipo</th>
+<th>Constraints</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK, DEFAULT gen_random_uuid()</td>
+<td>—</td>
+</tr>
+<tr>
+<td>name</td>
+<td>text</td>
+<td>NOT NULL, UNIQUE</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Índices: <code>name</code> (unique).</p>
+<h3 id="ticket_tags">ticket_tags<a class="headerlink" href="#ticket_tags" title="Permanent link">&para;</a></h3>
+<p>Relación N:M ticket↔etiqueta (RF-11, RF-12).</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Tipo</th>
+<th>Constraints</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ticket_id</td>
+<td>uuid</td>
+<td>FK→tickets.id, NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>tag_id</td>
+<td>uuid</td>
+<td>FK→tags.id, NOT NULL</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Clave primaria: <code>[ticket_id, tag_id]</code>.</p>
+<p>Índices: <code>tag_id</code> (filtro de tickets por etiqueta, RF-12, GET /tickets?tag=).</p>
+<h3 id="comments">comments<a class="headerlink" href="#comments" title="Permanent link">&para;</a></h3>
+<p>Comentarios internos dentro de un ticket (RF-15, H11). Relación 1:N ticket→comentario.</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Tipo</th>
+<th>Constraints</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK, DEFAULT gen_random_uuid()</td>
+<td>—</td>
+</tr>
+<tr>
+<td>ticket_id</td>
+<td>uuid</td>
+<td>FK→tickets.id, NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>author_id</td>
+<td>uuid</td>
+<td>FK→users.id, NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>body</td>
+<td>text</td>
+<td>NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td>NOT NULL, DEFAULT now()</td>
+<td>Define el orden cronológico del hilo (RF-15).</td>
+</tr>
+</tbody>
+</table>
+<p>Índices: <code>[ticket_id, created_at]</code> (listado paginado de comentarios de un ticket en orden cronológico ascendente).</p>
+<h3 id="audit_log">audit_log<a class="headerlink" href="#audit_log" title="Permanent link">&para;</a></h3>
+<p>Historial de cambios sobre tickets (H2, H4). Traza acciones de Admin sobre tickets ajenos.</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Tipo</th>
+<th>Constraints</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK, DEFAULT gen_random_uuid()</td>
+<td>—</td>
+</tr>
+<tr>
+<td>ticket_id</td>
+<td>uuid</td>
+<td>FK→tickets.id, NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>actor_id</td>
+<td>uuid</td>
+<td>FK→users.id, NOT NULL</td>
+<td>Quién realizó la acción.</td>
+</tr>
+<tr>
+<td>action</td>
+<td>enum(audit_action)</td>
+<td>NOT NULL</td>
+<td>—</td>
+</tr>
+<tr>
+<td>changes</td>
+<td>jsonb</td>
+<td>(sin constraints)</td>
+<td>Diff simplificado de campos modificados.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td>NOT NULL, DEFAULT now()</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Índices: <code>[ticket_id, created_at]</code> (listado paginado de auditoría de un ticket en orden descendente, GET /audit/:ticketId).</p>
+<p>Notas de tabla:
+- "immutable: true — esta tabla es solo de inserción (INSERT-only). No se permiten UPDATE ni DELETE sobre filas existentes; se recomienda reforzar con política RLS/trigger que rechace esas operaciones."</p>
+<h3 id="ticket_locks">ticket_locks<a class="headerlink" href="#ticket_locks" title="Permanent link">&para;</a></h3>
+<p>Soft lock informativo de edición (H10). Relación 1:1 con tickets — a lo sumo un lock activo por ticket.</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Tipo</th>
+<th>Constraints</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ticket_id</td>
+<td>uuid</td>
+<td>PK, FK→tickets.id</td>
+<td>—</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>uuid</td>
+<td>FK→users.id, NOT NULL</td>
+<td>Quién tiene el lock informativo.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td>NOT NULL, DEFAULT now()</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Notas de tabla:
+- "Puramente informativo/presencia: NO bloquea PATCH /tickets/:id (ver api-contract.md, 'Regla de locking'). No contradice RF-14 (last-write-wins)."
+- "PK en ticket_id (no un id propio) refuerza la cardinalidad 1:1: un ticket tiene a lo sumo un lock vigente."</p>
+<h2 id="3-decisiones-de-diseno">3. Decisiones de diseño<a class="headerlink" href="#3-decisiones-de-diseno" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>Soft-delete de tickets (<code>archived_at</code>)</strong>: en lugar de borrar físicamente un ticket, <code>tickets.archived_at</code> se usa como marca de archivado (RF-06). <code>NULL</code> significa activo; cualquier valor no-<code>NULL</code> significa archivado, y el registro nunca se elimina de la base de datos. Esta columna reemplaza el booleano <code>archived</code> del contrato API por un timestamp, lo que permite además saber <em>cuándo</em> se archivó el ticket. Por esta misma razón existe un índice sobre <code>archived_at</code>, pensado para excluir archivados por defecto en los listados (ver <code>GET /projects/:id/tickets</code> en <code>api-contract.md</code>).</p>
+</li>
+<li>
+<p><strong>Lock informativo / soft lock sobre tickets (<code>ticket_locks</code>)</strong>: <code>ticket_locks</code> modela un lock de edición puramente informativo o de "presencia" (H10), no un bloqueo pesimista real. El propio YAML aclara explícitamente que este lock <strong>NO bloquea</strong> las operaciones <code>PATCH /tickets/:id</code> (ver <code>api-contract.md</code>, sección "Regla de locking"), y que su existencia <strong>no contradice</strong> la regla de RF-14 de <em>last-write-wins</em> (última escritura gana, sin bloqueo optimista ni aviso de conflicto). Es decir: <code>ticket_locks</code> solo sirve para mostrar en la UI "quién está editando" un ticket, pero cualquier usuario puede seguir enviando un PATCH que sobrescriba los cambios sin importar si hay un lock vigente. La relación es 1:1 con <code>tickets</code>, reforzada a nivel de modelo por usar <code>ticket_id</code> como PK en lugar de un <code>id</code> propio, de modo que a lo sumo puede existir un lock activo por ticket.</p>
+</li>
+<li>
+<p><strong>Audit log inmutable (INSERT-only)</strong>: <code>audit_log</code> registra el historial de cambios sobre tickets (altas, actualizaciones, archivado, cambios de estado — ver enum <code>audit_action</code>), y el propio YAML marca la tabla como <code>immutable: true</code>. Esto significa que la tabla es exclusivamente de inserción: no se permiten <code>UPDATE</code> ni <code>DELETE</code> sobre filas existentes una vez creadas. El YAML recomienda reforzar esta regla a nivel de base de datos (no solo de aplicación) mediante una política RLS o un trigger que rechace esas operaciones, de forma que el historial de auditoría quede protegido incluso ante accesos directos a la base de datos.</p>
+</li>
+</ul>
+<h2 id="4-fuera-de-alcance-out_of_scope">4. Fuera de alcance (<code>out_of_scope</code>)<a class="headerlink" href="#4-fuera-de-alcance-out_of_scope" title="Permanent link">&para;</a></h2>
+<p>Tal como está declarado en <code>database-schema.yaml</code>:</p>
+<ul>
+<li>Notificaciones por email (RF-18) — fase 2, sin tabla asociada.</li>
+<li>Dashboard de métricas (RF-19) — fase 2, sin tabla asociada.</li>
+<li>SLA/umbral de rendimiento (RNF-01) — [PENDIENTE] en specs.md, no afecta el modelo de datos.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

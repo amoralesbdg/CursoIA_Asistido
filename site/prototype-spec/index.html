@@ -1,0 +1,1120 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica autogenerada de Mini Jira (API, diagramas, cobertura de tests, base de datos)">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Prototype Spec — Mini Jira (MVP) - Mini Jira — Documentación Técnica</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prototype-spec-mini-jira-mvp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-header__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mini Jira — Documentación Técnica
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Prototype Spec — Mini Jira (MVP)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../diagramas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Diagramas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cobertura-tests/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cobertura de Tests
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../base-de-datos/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Base de Datos
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mini Jira — Documentación Técnica" class="md-nav__button md-logo" aria-label="Mini Jira — Documentación Técnica" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mini Jira — Documentación Técnica
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagramas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagramas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cobertura-tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cobertura de Tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../base-de-datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base de Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="prototype-spec-mini-jira-mvp">Prototype Spec — Mini Jira (MVP)<a class="headerlink" href="#prototype-spec-mini-jira-mvp" title="Permanent link">&para;</a></h1>
+<p><strong>Fuente:</strong> <code>docs/specs.md</code> (Requerimientos Funcionales RF-01 a RF-19) y <code>architecture/er_diagram.md</code>.
+<strong>Alcance:</strong> Este documento define el sistema de diseño, los estándares de accesibilidad/usabilidad y las especificaciones de UI de cada funcionalidad del MVP identificada en <code>specs.md</code>. Todo el contenido de ejemplo (nombres, textos, avatares) es <strong>placeholder</strong> — no representa datos reales de la empresa. Este documento está pensado para alimentar tanto a Claude Code (implementación) como a Google Stitch (generación de UI).
+<strong>No incluye:</strong> pantallas de notificaciones por email (RF-18) ni dashboard de métricas (RF-19), por estar fuera de alcance del MVP.</p>
+<hr />
+<h2 id="a-sistema-de-diseno-design-tokens">A. Sistema de Diseño — Design Tokens<a class="headerlink" href="#a-sistema-de-diseno-design-tokens" title="Permanent link">&para;</a></h2>
+<p>Estética objetivo: "estilo Apple" — blanco, sombras suaves, minimalista, sin la apariencia "gris" de un Jira tradicional (RF-17). Los tokens se definen como variables semánticas para soportar modo claro y modo oscuro sin duplicar componentes (RF-16).</p>
+<h3 id="a1-color-primitivos">A.1 Color — Primitivos<a class="headerlink" href="#a1-color-primitivos" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c">/* Neutrales (escala de gris cálido, no puro #000/#FFF) */</span>
+<span class="nt">--gray-0</span><span class="o">:</span><span class="w">   </span><span class="p">#</span><span class="nn">FFFFFF</span><span class="o">;</span>
+<span class="nt">--gray-50</span><span class="o">:</span><span class="w">  </span><span class="p">#</span><span class="nn">F9FAFB</span><span class="o">;</span>
+<span class="nt">--gray-100</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">F2F3F5</span><span class="o">;</span>
+<span class="nt">--gray-200</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">E5E7EB</span><span class="o">;</span>
+<span class="nt">--gray-300</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">D1D5DB</span><span class="o">;</span>
+<span class="nt">--gray-400</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">9CA3AF</span><span class="o">;</span>
+<span class="nt">--gray-500</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">6B7280</span><span class="o">;</span>
+<span class="nt">--gray-600</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">4B5563</span><span class="o">;</span>
+<span class="nt">--gray-700</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">374151</span><span class="o">;</span>
+<span class="nt">--gray-800</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">1F2328</span><span class="o">;</span>
+<span class="nt">--gray-900</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">101214</span><span class="o">;</span>
+
+<span class="c">/* Acento (azul estilo iOS/macOS) */</span>
+<span class="nt">--blue-500</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">0A84FF</span><span class="o">;</span>
+<span class="nt">--blue-600</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">0066CC</span><span class="o">;</span>
+
+<span class="c">/* Semánticos de estado */</span>
+<span class="nt">--green-500</span><span class="o">:</span><span class="w">  </span><span class="p">#</span><span class="nn">34C759</span><span class="o">;</span><span class="w"> </span><span class="c">/* éxito / Terminado */</span>
+<span class="nt">--amber-500</span><span class="o">:</span><span class="w">  </span><span class="p">#</span><span class="nn">FF9F0A</span><span class="o">;</span><span class="w">  </span><span class="c">/* advertencia / Review */</span>
+<span class="nt">--red-500</span><span class="o">:</span><span class="w">    </span><span class="p">#</span><span class="nn">FF3B30</span><span class="o">;</span><span class="w">  </span><span class="c">/* error / prioridad Alta */</span>
+<span class="nt">--yellow-500</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">FFD60A</span><span class="o">;</span><span class="w">  </span><span class="c">/* prioridad Media */</span>
+</code></pre></div>
+<h3 id="a2-color-tokens-semanticos-light-dark">A.2 Color — Tokens semánticos (light / dark)<a class="headerlink" href="#a2-color-tokens-semanticos-light-dark" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Light</th>
+<th>Dark</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--color-bg-canvas</code></td>
+<td><code>gray-50</code></td>
+<td><code>gray-900</code></td>
+<td>Fondo general de la app</td>
+</tr>
+<tr>
+<td><code>--color-bg-surface</code></td>
+<td><code>gray-0</code></td>
+<td><code>#17191C</code></td>
+<td>Cards, modales, paneles (tarjetas de ticket, formularios)</td>
+</tr>
+<tr>
+<td><code>--color-bg-surface-raised</code></td>
+<td><code>gray-0</code></td>
+<td><code>#1F2226</code></td>
+<td>Elementos elevados (menús, popovers)</td>
+</tr>
+<tr>
+<td><code>--color-border-subtle</code></td>
+<td><code>gray-200</code></td>
+<td><code>#2A2D31</code></td>
+<td>Bordes de card, separadores</td>
+</tr>
+<tr>
+<td><code>--color-border-strong</code></td>
+<td><code>gray-300</code></td>
+<td><code>#3A3D42</code></td>
+<td>Bordes de input, focus ring base</td>
+</tr>
+<tr>
+<td><code>--color-text-primary</code></td>
+<td><code>gray-900</code></td>
+<td><code>gray-50</code></td>
+<td>Texto principal</td>
+</tr>
+<tr>
+<td><code>--color-text-secondary</code></td>
+<td><code>gray-500</code></td>
+<td><code>gray-400</code></td>
+<td>Metadatos, ayudas, timestamps</td>
+</tr>
+<tr>
+<td><code>--color-text-disabled</code></td>
+<td><code>gray-300</code></td>
+<td><code>gray-600</code></td>
+<td>Elementos deshabilitados</td>
+</tr>
+<tr>
+<td><code>--color-accent</code></td>
+<td><code>blue-500</code></td>
+<td><code>blue-500</code></td>
+<td>Acciones primarias, links, focus</td>
+</tr>
+<tr>
+<td><code>--color-accent-contrast</code></td>
+<td><code>gray-0</code></td>
+<td><code>gray-0</code></td>
+<td>Texto sobre <code>--color-accent</code></td>
+</tr>
+<tr>
+<td><code>--color-success</code></td>
+<td><code>green-500</code></td>
+<td><code>green-500</code></td>
+<td>Estado "Terminado", confirmaciones</td>
+</tr>
+<tr>
+<td><code>--color-warning</code></td>
+<td><code>amber-500</code></td>
+<td><code>amber-500</code></td>
+<td>Estado "Review", avisos</td>
+</tr>
+<tr>
+<td><code>--color-danger</code></td>
+<td><code>red-500</code></td>
+<td><code>red-500</code></td>
+<td>Prioridad Alta, errores, archivar</td>
+</tr>
+<tr>
+<td><code>--color-shadow</code></td>
+<td><code>rgba(16,18,20,0.08)</code></td>
+<td><code>rgba(0,0,0,0.45)</code></td>
+<td>Base para tokens de elevación</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tokens de prioridad (RF-11):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Prioridad</th>
+<th>Color</th>
+<th>Token</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alta</td>
+<td>Rojo</td>
+<td><code>--priority-high: var(--red-500)</code></td>
+</tr>
+<tr>
+<td>Media</td>
+<td>Ámbar/Amarillo</td>
+<td><code>--priority-medium: var(--yellow-500)</code></td>
+</tr>
+<tr>
+<td>Baja</td>
+<td>Verde azulado</td>
+<td><code>--priority-low: #30B0C7</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tokens de estado del tablero (RF-13):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Token</th>
+<th>Color indicador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Por hacer</td>
+<td><code>--status-todo</code></td>
+<td><code>gray-400</code></td>
+</tr>
+<tr>
+<td>En progreso</td>
+<td><code>--status-in-progress</code></td>
+<td><code>blue-500</code></td>
+</tr>
+<tr>
+<td>Review</td>
+<td><code>--status-review</code></td>
+<td><code>amber-500</code></td>
+</tr>
+<tr>
+<td>Terminado</td>
+<td><code>--status-done</code></td>
+<td><code>green-500</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="a3-tipografia">A.3 Tipografía<a class="headerlink" href="#a3-tipografia" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">--font-family-base</span><span class="o">:</span><span class="w"> </span><span class="nt">-apple-system</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;SF Pro Text&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;Inter&quot;</span><span class="o">,</span><span class="w"> </span><span class="nt">system-ui</span><span class="o">,</span><span class="w"> </span><span class="nt">sans-serif</span><span class="o">;</span>
+<span class="nt">--font-family-mono</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;SF Mono&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;JetBrains Mono&quot;</span><span class="o">,</span><span class="w"> </span><span class="nt">monospace</span><span class="o">;</span><span class="w"> </span><span class="c">/* IDs de ticket, código */</span>
+
+<span class="nt">--font-size-caption</span><span class="o">:</span><span class="w"> </span><span class="nt">12px</span><span class="o">;</span><span class="w">  </span><span class="c">/* line-height 16px — metadatos, timestamps */</span>
+<span class="nt">--font-size-body-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">13px</span><span class="o">;</span><span class="w">  </span><span class="c">/* line-height 18px — texto secundario, labels */</span>
+<span class="nt">--font-size-body</span><span class="o">:</span><span class="w"> </span><span class="nt">15px</span><span class="o">;</span><span class="w">     </span><span class="c">/* line-height 22px — texto de UI por defecto */</span>
+<span class="nt">--font-size-title-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">17px</span><span class="o">;</span><span class="w"> </span><span class="c">/* line-height 22px — título de card/modal pequeño */</span>
+<span class="nt">--font-size-title</span><span class="o">:</span><span class="w"> </span><span class="nt">20px</span><span class="o">;</span><span class="w">    </span><span class="c">/* line-height 26px — título de sección */</span>
+<span class="nt">--font-size-headline</span><span class="o">:</span><span class="w"> </span><span class="nt">28px</span><span class="o">;</span><span class="w"> </span><span class="c">/* line-height 34px — título de página */</span>
+
+<span class="nt">--font-weight-regular</span><span class="o">:</span><span class="w"> </span><span class="nt">400</span><span class="o">;</span>
+<span class="nt">--font-weight-medium</span><span class="o">:</span><span class="w"> </span><span class="nt">500</span><span class="o">;</span>
+<span class="nt">--font-weight-semibold</span><span class="o">:</span><span class="w"> </span><span class="nt">600</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="a4-espaciado-escala-base-4px">A.4 Espaciado (escala base 4px)<a class="headerlink" href="#a4-espaciado-escala-base-4px" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">--space-1</span><span class="o">:</span><span class="w"> </span><span class="nt">4px</span><span class="o">;</span><span class="w">  </span><span class="nt">--space-2</span><span class="o">:</span><span class="w"> </span><span class="nt">8px</span><span class="o">;</span><span class="w">  </span><span class="nt">--space-3</span><span class="o">:</span><span class="w"> </span><span class="nt">12px</span><span class="o">;</span><span class="w"> </span><span class="nt">--space-4</span><span class="o">:</span><span class="w"> </span><span class="nt">16px</span><span class="o">;</span>
+<span class="nt">--space-5</span><span class="o">:</span><span class="w"> </span><span class="nt">20px</span><span class="o">;</span><span class="w"> </span><span class="nt">--space-6</span><span class="o">:</span><span class="w"> </span><span class="nt">24px</span><span class="o">;</span><span class="w"> </span><span class="nt">--space-8</span><span class="o">:</span><span class="w"> </span><span class="nt">32px</span><span class="o">;</span><span class="w"> </span><span class="nt">--space-10</span><span class="o">:</span><span class="w"> </span><span class="nt">40px</span><span class="o">;</span><span class="w"> </span><span class="nt">--space-12</span><span class="o">:</span><span class="w"> </span><span class="nt">48px</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="a5-radios-elevacion-y-bordes">A.5 Radios, elevación y bordes<a class="headerlink" href="#a5-radios-elevacion-y-bordes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">--radius-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">8px</span><span class="o">;</span><span class="w">   </span><span class="c">/* inputs, chips */</span>
+<span class="nt">--radius-md</span><span class="o">:</span><span class="w"> </span><span class="nt">12px</span><span class="o">;</span><span class="w">  </span><span class="c">/* cards de ticket */</span>
+<span class="nt">--radius-lg</span><span class="o">:</span><span class="w"> </span><span class="nt">16px</span><span class="o">;</span><span class="w">  </span><span class="c">/* modales, paneles */</span>
+<span class="nt">--radius-full</span><span class="o">:</span><span class="w"> </span><span class="nt">999px</span><span class="o">;</span><span class="w"> </span><span class="c">/* avatares, badges pill */</span>
+
+<span class="nt">--shadow-1</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">1px</span><span class="w"> </span><span class="nt">2px</span><span class="w"> </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-shadow</span><span class="o">);</span><span class="w">                         </span><span class="c">/* card en reposo */</span>
+<span class="nt">--shadow-2</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">2px</span><span class="w"> </span><span class="nt">8px</span><span class="w"> </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-shadow</span><span class="o">);</span><span class="w">                         </span><span class="c">/* card hover / dropdown */</span>
+<span class="nt">--shadow-3</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">8px</span><span class="w"> </span><span class="nt">24px</span><span class="w"> </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-shadow</span><span class="o">);</span><span class="w">                        </span><span class="c">/* modal, popover */</span>
+<span class="nt">--shadow-4</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">16px</span><span class="w"> </span><span class="nt">48px</span><span class="w"> </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-shadow</span><span class="o">);</span><span class="w">                       </span><span class="c">/* modal grande / drag activo */</span>
+</code></pre></div>
+<h3 id="a6-movimiento">A.6 Movimiento<a class="headerlink" href="#a6-movimiento" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">--duration-fast</span><span class="o">:</span><span class="w"> </span><span class="nt">120ms</span><span class="o">;</span><span class="w">   </span><span class="c">/* hover, focus */</span>
+<span class="nt">--duration-base</span><span class="o">:</span><span class="w"> </span><span class="nt">200ms</span><span class="o">;</span><span class="w">   </span><span class="c">/* apertura de modal, cambio de columna */</span>
+<span class="nt">--duration-slow</span><span class="o">:</span><span class="w"> </span><span class="nt">320ms</span><span class="o">;</span><span class="w">   </span><span class="c">/* transición de tema claro/oscuro */</span>
+<span class="nt">--easing-standard</span><span class="o">:</span><span class="w"> </span><span class="nt">cubic-bezier</span><span class="o">(</span><span class="nt">0</span><span class="p">.</span><span class="nc">2</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">1</span><span class="o">);</span>
+<span class="nt">--easing-decelerate</span><span class="o">:</span><span class="w"> </span><span class="nt">cubic-bezier</span><span class="o">(</span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">1</span><span class="o">);</span>
+
+<span class="p">@</span><span class="k">media</span><span class="w"> </span><span class="o">(</span><span class="nt">prefers-reduced-motion</span><span class="o">:</span><span class="w"> </span><span class="nt">reduce</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c">/* todas las duraciones se fuerzan a 0ms; ver sección B.7 */</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="a7-layout-breakpoints">A.7 Layout / breakpoints<a class="headerlink" href="#a7-layout-breakpoints" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Valor</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--breakpoint-sm</code></td>
+<td>480px</td>
+<td>Móvil</td>
+</tr>
+<tr>
+<td><code>--breakpoint-md</code></td>
+<td>768px</td>
+<td>Tablet — tablero pasa de scroll horizontal a columnas fijas</td>
+</tr>
+<tr>
+<td><code>--breakpoint-lg</code></td>
+<td>1024px</td>
+<td>Desktop — sidebar de navegación visible</td>
+</tr>
+<tr>
+<td><code>--breakpoint-xl</code></td>
+<td>1440px</td>
+<td>Desktop grande — máximo ancho de contenido <code>1280px</code>, centrado</td>
+</tr>
+<tr>
+<td><code>--container-max-width</code></td>
+<td>1280px</td>
+<td>Ancho máximo de contenido principal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="a8-iconografia">A.8 Iconografía<a class="headerlink" href="#a8-iconografia" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set de líneas (estilo SF Symbols / Lucide), stroke <code>1.5px</code>, tamaños <code>16px</code> / <code>20px</code> / <code>24px</code>.</li>
+<li>Iconos usados: prioridad (bandera), fecha (calendario), responsable (persona/avatar), proyecto (carpeta), etiqueta (tag), comentario (burbuja), archivar (caja), tema (sol/luna).</li>
+</ul>
+<hr />
+<h2 id="b-estandares-wcag-21-aa-usabilidad">B. Estándares WCAG 2.1 AA + Usabilidad<a class="headerlink" href="#b-estandares-wcag-21-aa-usabilidad" title="Permanent link">&para;</a></h2>
+<p>Aplica a todas las pantallas descritas en la sección C. Los tokens de la sección A ya están construidos para cumplir contraste en ambos temas; cualquier combinación nueva debe validarse contra esta tabla antes de usarse.</p>
+<h3 id="b1-contraste-de-color">B.1 Contraste de color<a class="headerlink" href="#b1-contraste-de-color" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterio WCAG</th>
+<th>Regla</th>
+<th>Aplicación en el prototipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.4.3 Contraste mínimo (AA)</td>
+<td>Texto normal ≥ 4.5:1, texto grande (≥18.66px bold o ≥24px) ≥ 3:1</td>
+<td><code>--color-text-primary</code> sobre <code>--color-bg-surface</code> ≥ 4.5:1 en ambos temas; validar antes de publicar cualquier combinación nueva</td>
+</tr>
+<tr>
+<td>1.4.11 Contraste no textual</td>
+<td>Componentes de UI e iconos informativos ≥ 3:1 contra el fondo adyacente</td>
+<td>Bordes de input, indicadores de columna del tablero, iconos de prioridad</td>
+</tr>
+<tr>
+<td>—</td>
+<td>El color nunca es el único portador de significado</td>
+<td>Prioridad y estado siempre llevan color <strong>+ texto/ícono</strong> (ej. "Alta" en rojo + etiqueta de texto "Alta", no solo un punto de color)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b2-teclado-y-foco">B.2 Teclado y foco<a class="headerlink" href="#b2-teclado-y-foco" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Regla</th>
+<th>Aplicación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1.1 Teclado</td>
+<td>Toda acción (crear ticket, cambiar estado, asignar, comentar, archivar) operable sin mouse</td>
+<td>El drag-and-drop del tablero (C.3) debe tener alternativa por teclado: seleccionar ticket + menú "Mover a…"</td>
+</tr>
+<tr>
+<td>2.1.2 Sin trampas de teclado</td>
+<td>Modales y menús deben poder cerrarse con <code>Esc</code> y devolver el foco al elemento que los abrió</td>
+<td>Formulario de ticket, modal de asignación, selector de tema</td>
+</tr>
+<tr>
+<td>2.4.3 Orden de foco</td>
+<td>El orden de tabulación sigue el orden visual/lógico</td>
+<td>Formulario de ticket: título → descripción → prioridad → fecha → responsables → proyecto → etiquetas → guardar</td>
+</tr>
+<tr>
+<td>2.4.7 Foco visible</td>
+<td>Anillo de foco visible en todo elemento interactivo, contraste ≥ 3:1</td>
+<td><code>outline: 2px solid var(--color-accent); outline-offset: 2px;</code> — nunca <code>outline: none</code> sin reemplazo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b3-formularios">B.3 Formularios<a class="headerlink" href="#b3-formularios" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Regla</th>
+<th>Aplicación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.3.1 Identificación de errores</td>
+<td>Error se anuncia en texto, no solo con color</td>
+<td>Campo "Email" inválido: borde rojo + mensaje "Introduce un email válido" bajo el campo</td>
+</tr>
+<tr>
+<td>3.3.2 Etiquetas o instrucciones</td>
+<td>Todo input tiene <code>&lt;label&gt;</code> visible asociado (no solo placeholder)</td>
+<td>Formulario de login, formulario de ticket, formulario de proyecto</td>
+</tr>
+<tr>
+<td>3.3.3 Sugerencia ante errores</td>
+<td>El mensaje de error indica cómo corregir</td>
+<td>"La contraseña debe tener al menos 8 caracteres" en vez de "Contraseña inválida"</td>
+</tr>
+<tr>
+<td>1.3.1 Info y relaciones</td>
+<td>Agrupar campos relacionados con <code>&lt;fieldset&gt;</code>/<code>aria-describedby</code></td>
+<td>Grupo de "Prioridad" (radio/select) con descripción accesible</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b4-estructura-y-semantica">B.4 Estructura y semántica<a class="headerlink" href="#b4-estructura-y-semantica" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Jerarquía de encabezados (<code>h1</code>→<code>h6</code>) sin saltos, un <code>h1</code> por vista.</li>
+<li>Roles ARIA en componentes custom: el tablero Kanban usa <code>role="list"</code>/<code>role="listitem"</code> por columna y ticket, con <code>aria-label</code> indicando la columna (ej. "Columna: En progreso, 4 tickets").</li>
+<li>Nombre accesible en cada botón de solo-ícono (ej. botón de archivar ticket: <code>aria-label="Archivar ticket"</code>).</li>
+</ul>
+<h3 id="b5-responsive-y-zoom">B.5 Responsive y zoom<a class="headerlink" href="#b5-responsive-y-zoom" title="Permanent link">&para;</a></h3>
+<ul>
+<li>1.4.4 / 1.4.10: la UI es funcional y sin pérdida de contenido con zoom de hasta 200% y con reflow en viewport de 320px de ancho (sin scroll horizontal salvo el tablero Kanban, que lo declara explícitamente).</li>
+<li>Objetivo de usabilidad (no derivado de un SC de AA, pero aplicado como buena práctica): objetivos táctiles ≥ 24×24px con espaciado suficiente entre acciones adyacentes (ej. botones de acción rápida sobre una card de ticket).</li>
+</ul>
+<h3 id="b6-estados-de-carga-vacio-y-error-usabilidad-nielsen-heuristicas-1-y-9">B.6 Estados de carga, vacío y error (usabilidad, Nielsen heurísticas #1 y #9)<a class="headerlink" href="#b6-estados-de-carga-vacio-y-error-usabilidad-nielsen-heuristicas-1-y-9" title="Permanent link">&para;</a></h3>
+<p>Toda vista con datos remotos (lista de proyectos, tablero, filtros) debe definir explícitamente:
+- <strong>Loading:</strong> skeleton de la misma forma que el contenido final (nunca solo un spinner genérico en pantallas con estructura, para reducir el salto de layout).
+- <strong>Vacío:</strong> mensaje + ilustración simple + acción primaria (ej. "Aún no tienes proyectos" + botón "Crear proyecto").
+- <strong>Error:</strong> mensaje en lenguaje claro + acción de reintento.
+- <strong>Restringido por rol:</strong> cuando una acción no está disponible por permisos (RF-03, RF-04, RF-05), el control se oculta (no se deshabilita sin explicación) o, si se deshabilita, incluye tooltip/mensaje indicando el motivo.</p>
+<h3 id="b7-movimiento-y-preferencias-del-sistema">B.7 Movimiento y preferencias del sistema<a class="headerlink" href="#b7-movimiento-y-preferencias-del-sistema" title="Permanent link">&para;</a></h3>
+<ul>
+<li>2.3.3 (buena práctica AAA aplicada igualmente): respetar <code>prefers-reduced-motion</code> — desactivar animaciones de drag, transición de columnas y cambio de tema cuando está activo.</li>
+<li>Modo oscuro (RF-16) respeta por defecto <code>prefers-color-scheme</code> del sistema operativo, con override manual persistente en el selector de tema.</li>
+</ul>
+<hr />
+<h2 id="c-funcionalidades-del-mvp">C. Funcionalidades del MVP<a class="headerlink" href="#c-funcionalidades-del-mvp" title="Permanent link">&para;</a></h2>
+<p>Funcionalidades identificadas en <code>specs.md</code> (sección 5, RF-01 a RF-17): <strong>Autenticación</strong>, <strong>Gestión de Proyectos</strong>, <strong>Tablero de Tickets</strong>, <strong>Detalle y Formulario de Ticket</strong> (incluye asignación de personas, etiquetas y campos), <strong>Filtros de Tickets</strong>, <strong>Comentarios</strong>, y <strong>Modo Oscuro</strong>. RF-18 y RF-19 quedan fuera de esta especificación.</p>
+<h3 id="c1-autenticacion-login-registro">C.1 Autenticación (Login / Registro)<a class="headerlink" href="#c1-autenticacion-login-registro" title="Permanent link">&para;</a></h3>
+<p><strong>Propósito:</strong> permitir el acceso mediante usuario/contraseña propios, con email obligatorio por cuenta (RF-01), sin proveedor externo.</p>
+<p><strong>Componentes:</strong>
+- <code>AuthCard</code> (surface centrada, <code>--shadow-3</code>, <code>--radius-lg</code>, ancho máx. 400px)
+- <code>TextInput</code> (usuario, email, contraseña) con label visible y estado de error inline (B.3)
+- <code>PasswordInput</code> con toggle de visibilidad (ícono ojo, <code>aria-pressed</code>)
+- <code>Button</code> primario ("Iniciar sesión" / "Crear cuenta"), ancho completo
+- <code>LinkText</code> para alternar entre login y registro
+- <code>ThemeToggle</code> en la esquina superior (persistente incluso pre-login, ver C.7)</p>
+<p><strong>Layout:</strong>
+- Pantalla completa, <code>--color-bg-canvas</code> de fondo, <code>AuthCard</code> centrada vertical y horizontalmente.
+- Logo/nombre del producto ("Mini Jira", placeholder) sobre el card.
+- En viewport &lt; 480px: card ocupa 100% del ancho con <code>--space-4</code> de margen lateral.</p>
+<p><strong>Estados:</strong>
+| Estado | Descripción |
+|---|---|
+| Vacío inicial | Formulario de login por defecto, campos vacíos, botón habilitado (validación al submit) |
+| Validando | Botón muestra spinner inline, campos deshabilitados |
+| Error de credenciales | Mensaje general sobre el formulario: "Usuario o contraseña incorrectos" (no se especifica cuál falló, por seguridad) |
+| Error de validación de campo | Mensaje inline bajo el campo específico (ej. email con formato inválido) — RF-01 |
+| Registro exitoso | Redirección automática al estado autenticado (vista de Proyectos, C.2) |</p>
+<hr />
+<h3 id="c2-gestion-de-proyectos">C.2 Gestión de Proyectos<a class="headerlink" href="#c2-gestion-de-proyectos" title="Permanent link">&para;</a></h3>
+<p><strong>Propósito:</strong> listar, crear y editar proyectos; controlar visibilidad según rol y membresía (RF-05, RF-08, RF-09, RF-09-bis).</p>
+<p><strong>Componentes:</strong>
+- <code>ProjectCard</code> (nombre del proyecto, cantidad de tickets, avatares apilados de miembros — máx. 4 visibles + contador "+N")
+- <code>ProjectGrid</code> / <code>ProjectList</code> — grid responsivo de <code>ProjectCard</code>
+- <code>Button</code> "Nuevo proyecto" (esquina superior derecha, ícono <code>+</code>)
+- <code>ProjectFormModal</code>: campo nombre, selector de miembros (multi-select con búsqueda por nombre/email, placeholder)
+- <code>RoleBadge</code> visible solo para Admin, indicando si el proyecto fue creado por otro usuario</p>
+<p><strong>Layout:</strong>
+- Header de página: título "Proyectos" (h1) + botón "Nuevo proyecto" alineado a la derecha.
+- Grid de <code>ProjectCard</code>: 3 columnas en desktop (<code>--breakpoint-lg</code>+), 2 en tablet, 1 en móvil.
+- Modal de creación/edición: overlay con <code>--shadow-4</code>, ancho máx. 480px, centrado.</p>
+<p><strong>Estados:</strong>
+| Estado | Descripción |
+|---|---|
+| Vista Admin | Ve todos los proyectos de la empresa (RF-09) |
+| Vista Usuario normal | Ve solo proyectos creados por él o donde es miembro (RF-09); el resto no aparece en el listado (no hay estado "bloqueado" visible) |
+| Vacío | "Aún no tienes proyectos" + botón "Crear proyecto" |
+| Cargando | Skeleton de <code>ProjectCard</code> (3–6 placeholders) |
+| Edición de miembros | Solo visible para el creador del proyecto o un Admin (RF-09-bis); otros usuarios ven la lista de miembros en modo solo lectura |
+| Error al guardar | Toast/inline error: "No se pudo guardar el proyecto, intenta de nuevo" |</p>
+<hr />
+<h3 id="c3-tablero-de-tickets-kanban">C.3 Tablero de Tickets (Kanban)<a class="headerlink" href="#c3-tablero-de-tickets-kanban" title="Permanent link">&para;</a></h3>
+<p><strong>Propósito:</strong> visualizar y mover tickets a través de 4 columnas fijas con transición secuencial obligatoria (RF-13).</p>
+<p><strong>Componentes:</strong>
+- <code>BoardColumn</code> × 4: "Por hacer", "En progreso", "Review", "Terminado" — header con nombre + contador + color indicador (<code>--status-*</code>)
+- <code>TicketCard</code>: título, badge de prioridad (color + texto), avatares de responsables (máx. 3 + "+N"), etiquetas (chips, máx. 2 visibles + "+N"), fecha límite
+- <code>DragHandle</code> implícito en toda la card (drag-and-drop) + acción alternativa por teclado (menú contextual "Mover a…", ver B.2)
+- <code>EmptyColumnState</code> (ilustración/mensaje sutil dentro de la columna)
+- <code>BoardFilterBar</code> (ver C.5) anclada sobre el tablero</p>
+<p><strong>Layout:</strong>
+- 4 columnas de ancho fijo (~280px) en fila; scroll horizontal en viewport &lt; <code>--breakpoint-md</code> (declarado explícitamente, RF-13 requiere ver las 4 columnas).
+- <code>TicketCard</code> con <code>--radius-md</code>, <code>--shadow-1</code> en reposo, <code>--shadow-2</code> en hover, <code>--shadow-4</code> mientras se arrastra.
+- Espaciado entre cards: <code>--space-3</code>; padding interno de columna: <code>--space-4</code>.</p>
+<p><strong>Estados:</strong>
+| Estado | Descripción |
+|---|---|
+| Reposo | Cards distribuidas por estado actual |
+| Arrastrando | Card con <code>--shadow-4</code> y ligera rotación (2°); columnas destino válidas se resaltan con borde <code>--color-accent</code> |
+| Movimiento inválido (salto de columna) | Al soltar sobre columna no adyacente: la card vuelve a su posición + toast "No se puede saltar columnas" (RF-13) |
+| Movimiento no autorizado | Si el usuario no es Admin, creador ni asignado: card no es arrastrable, cursor <code>not-allowed</code>, tooltip "No tienes permiso para mover este ticket" (RF-03/RF-04) |
+| Columna vacía | <code>EmptyColumnState</code>: "Sin tickets" en texto secundario, centrado |
+| Cargando | Skeleton de <code>TicketCard</code> en cada columna |</p>
+<hr />
+<h3 id="c4-detalle-y-formulario-de-ticket">C.4 Detalle y Formulario de Ticket<a class="headerlink" href="#c4-detalle-y-formulario-de-ticket" title="Permanent link">&para;</a></h3>
+<p><strong>Propósito:</strong> crear/editar un ticket con sus campos (RF-11), incluyendo asignación múltiple de personas (RF-10) y resolución de ediciones concurrentes por last-write-wins (RF-14, sin UI de conflicto).</p>
+<p><strong>Componentes:</strong>
+- <code>TicketModal</code> (o panel lateral deslizante en desktop ancho) con dos zonas: contenido principal (título, descripción) y sidebar de metadatos
+- <code>TextInput</code> título, <code>TextArea</code> descripción (soporta texto plano, placeholder)
+- <code>PrioritySelect</code>: 3 opciones (Alta/Media/Baja) representadas como <code>SegmentedControl</code> o <code>Select</code> con color + texto
+- <code>DatePicker</code> para fecha
+- <code>AssigneeMultiSelect</code>: campo tipo combobox con búsqueda, muestra avatares seleccionados como chips removibles; cualquier usuario puede asignarse a sí mismo o a otros (RF-10)
+- <code>ProjectSelect</code>: select de proyecto (1:1 ticket→proyecto, RF-07) — solo proyectos visibles para el usuario (RF-09)
+- <code>TagInput</code>: chips de texto libre, sin lista predefinida (RF-11), se agregan con <code>Enter</code> o coma
+- <code>StatusBadge</code> (solo lectura en el formulario; el cambio de estado ocurre en el tablero, C.3)
+- <code>ArchiveButton</code> (ver estados de permiso abajo)
+- <code>CommentSection</code> (ver C.6) anclada al final del modal/panel</p>
+<p><strong>Layout:</strong>
+- Desktop: panel lateral deslizante desde la derecha, 480px de ancho, <code>--shadow-4</code>, altura completa con scroll interno.
+- Móvil: modal a pantalla completa.
+- Sidebar de metadatos (prioridad, fecha, responsables, proyecto, etiquetas) apilado verticalmente con labels a la izquierda (o arriba en móvil).</p>
+<p><strong>Estados:</strong>
+| Estado | Descripción |
+|---|---|
+| Creación | Todos los campos vacíos salvo proyecto (preseleccionado si se abre desde el tablero de un proyecto) |
+| Edición | Campos prellenados; guardado autosave o botón explícito "Guardar" (a definir en implementación, no especificado en <code>specs.md</code>) |
+| Solo lectura por permisos | Usuario normal que no creó ni fue asignado al ticket: campos deshabilitados salvo el propio botón de auto-asignarse (RF-04, RF-10) |
+| Guardado con conflicto silencioso | No hay banner de conflicto (RF-14): al guardar, simplemente prevalece la última escritura; el formulario no debe mostrar advertencia de "alguien más editó esto" |
+| Archivado (soft-delete) | Ticket archivado se muestra con badge "Archivado" + estilo atenuado (opacidad reducida); el botón cambia a "Restaurar" si el usuario tiene permiso (RF-06) |
+| Botón "Eliminar" | Etiqueta visible dice "Eliminar" aunque la acción es soft-delete (supuesto de <code>specs.md</code>, sección 4); solo visible para el creador, un asignado, o un Admin (RF-05) |</p>
+<hr />
+<h3 id="c5-filtros-de-tickets">C.5 Filtros de Tickets<a class="headerlink" href="#c5-filtros-de-tickets" title="Permanent link">&para;</a></h3>
+<p><strong>Propósito:</strong> filtrar el listado/tablero de tickets por fecha, prioridad, responsable, proyecto y etiquetas (RF-12).</p>
+<p><strong>Componentes:</strong>
+- <code>BoardFilterBar</code>: fila horizontal de controles de filtro sobre el tablero o la lista
+- <code>FilterChip</code> por cada filtro activo (ej. "Prioridad: Alta ✕"), removible individualmente
+- <code>FilterDropdown</code> por campo: fecha (rango), prioridad (multi-check Alta/Media/Baja), responsable (búsqueda de persona), proyecto (select, solo proyectos visibles), etiquetas (búsqueda de texto libre con autocompletado de etiquetas existentes)
+- <code>ClearFiltersButton</code> ("Limpiar filtros"), visible solo cuando hay al menos un filtro activo</p>
+<p><strong>Layout:</strong>
+- Barra fija (sticky) debajo del header de página, sobre el tablero/lista.
+- En móvil: los controles colapsan en un único botón "Filtros" que abre un panel inferior (bottom sheet) con los mismos controles apilados.</p>
+<p><strong>Estados:</strong>
+| Estado | Descripción |
+|---|---|
+| Sin filtros | Barra muestra solo los controles vacíos, sin chips |
+| Filtros activos | Chips visibles + contador en el botón "Filtros" (móvil) |
+| Sin resultados | Estado vacío del tablero/lista: "Ningún ticket coincide con los filtros" + <code>ClearFiltersButton</code> destacado |
+| Combinación de filtros | Los filtros se combinan con AND (ej. prioridad Alta + proyecto X); no se especifica lógica OR en <code>specs.md</code> |</p>
+<hr />
+<h3 id="c6-comentarios-del-ticket">C.6 Comentarios del Ticket<a class="headerlink" href="#c6-comentarios-del-ticket" title="Permanent link">&para;</a></h3>
+<p><strong>Propósito:</strong> hilo de conversación interno dentro de cada ticket (RF-15).</p>
+<p><strong>Componentes:</strong>
+- <code>CommentList</code>: lista cronológica ascendente (más antiguo arriba, más reciente abajo)
+- <code>CommentItem</code>: avatar + nombre del autor + timestamp relativo ("hace 2 h") + contenido en texto plano
+- <code>CommentComposer</code>: <code>TextArea</code> expandible + botón "Comentar" (deshabilitado si el campo está vacío)</p>
+<p><strong>Layout:</strong>
+- Sección fija al final del <code>TicketModal</code>/panel (C.4), con scroll interno independiente si la lista es larga.
+- <code>CommentComposer</code> anclado (sticky) al fondo de la sección de comentarios.</p>
+<p><strong>Estados:</strong>
+| Estado | Descripción |
+|---|---|
+| Sin comentarios | "Aún no hay comentarios. Sé el primero en comentar." |
+| Cargando | Skeleton de 2–3 <code>CommentItem</code> |
+| Enviando | Composer deshabilitado, botón con spinner inline |
+| Error al enviar | Mensaje inline bajo el composer: "No se pudo publicar el comentario" + botón "Reintentar", el texto escrito no se pierde |</p>
+<hr />
+<h3 id="c7-modo-oscuro-tema">C.7 Modo Oscuro (Tema)<a class="headerlink" href="#c7-modo-oscuro-tema" title="Permanent link">&para;</a></h3>
+<p><strong>Propósito:</strong> alternar entre modo claro y oscuro en toda la interfaz (RF-16), aplicando los tokens semánticos de la sección A.2.</p>
+<p><strong>Componentes:</strong>
+- <code>ThemeToggle</code>: control de 2–3 posiciones (Claro / Oscuro / Sistema), ícono sol/luna, ubicado en la barra de navegación principal (visible en todas las vistas autenticadas y en C.1)</p>
+<p><strong>Layout:</strong>
+- Ubicado en la esquina superior derecha de la navegación global, junto al avatar/menú de usuario.</p>
+<p><strong>Estados:</strong>
+| Estado | Descripción |
+|---|---|
+| Sistema (por defecto) | Sigue <code>prefers-color-scheme</code> del sistema operativo |
+| Claro forzado | Usuario seleccionó explícitamente "Claro"; se persiste la preferencia |
+| Oscuro forzado | Usuario seleccionó explícitamente "Oscuro"; se persiste la preferencia |
+| Transición | Cambio de tema anima con <code>--duration-slow</code> / <code>--easing-standard</code>, salvo <code>prefers-reduced-motion</code> (B.7) |</p>
+<hr />
+<h2 id="d-trazabilidad-funcionalidad-requerimiento">D. Trazabilidad Funcionalidad ↔ Requerimiento<a class="headerlink" href="#d-trazabilidad-funcionalidad-requerimiento" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Requerimientos cubiertos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C.1 Autenticación</td>
+<td>RF-01</td>
+</tr>
+<tr>
+<td>C.2 Gestión de Proyectos</td>
+<td>RF-05, RF-08, RF-09, RF-09-bis</td>
+</tr>
+<tr>
+<td>C.3 Tablero de Tickets</td>
+<td>RF-13, RF-03 (autorización de movimiento)</td>
+</tr>
+<tr>
+<td>C.4 Detalle y Formulario de Ticket</td>
+<td>RF-04, RF-05, RF-06, RF-07, RF-10, RF-11, RF-14</td>
+</tr>
+<tr>
+<td>C.5 Filtros de Tickets</td>
+<td>RF-12</td>
+</tr>
+<tr>
+<td>C.6 Comentarios</td>
+<td>RF-15</td>
+</tr>
+<tr>
+<td>C.7 Modo Oscuro</td>
+<td>RF-16</td>
+</tr>
+<tr>
+<td>A + B (transversal)</td>
+<td>RF-17 (estética), aplicable a toda pantalla</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

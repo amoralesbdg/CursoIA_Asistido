@@ -1,10 +1,19 @@
 import { useParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import { KanbanBoard } from '../components/organisms/KanbanBoard'
-import { projects } from '../mocks'
+import { getProject } from '../lib/api'
 
 export function ProjectBoardPage() {
   const { projectId } = useParams<{ projectId: string }>()
-  const project = projects.find((p) => p.id === projectId)
+  const { data: project, isLoading } = useQuery({
+    queryKey: ['project', projectId],
+    queryFn: () => getProject(projectId!),
+    enabled: !!projectId,
+  })
+
+  if (isLoading) {
+    return <p className="text-body text-fg-2">Cargando proyecto…</p>
+  }
 
   if (!project) {
     return <p className="text-body text-fg-2">Proyecto no encontrado.</p>

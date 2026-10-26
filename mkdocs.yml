@@ -1,0 +1,40 @@
+site_name: Mini Jira — Documentación Técnica
+site_description: Documentación técnica autogenerada de Mini Jira (API, diagramas, cobertura de tests, base de datos)
+docs_dir: docs
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+  features:
+    - navigation.tabs
+    - navigation.top
+    - content.code.copy
+    - toc.integrate
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Inicio: index.md
+  - API Reference: api-reference.md
+  - Diagramas: diagramas.md
+  - Cobertura de Tests: cobertura-tests.md
+  - Base de Datos: base-de-datos.md
